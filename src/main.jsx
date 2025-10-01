@@ -14,19 +14,19 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path:"/displayproduct/:productId",
+    path:"/bonanza-ecommerce/displayproduct/:productId",
     element: <DisplayProduct />
   },
   {
-    path:"/userprofile/:userToken",
+    path:"/bonanza-ecommerce/userprofile/:userToken",
     element: <UserProfile />
   },
   {
-    path:"/shoppingcart/:userId",
+    path:"/bonanza-ecommerce/shoppingcart/:userId",
     element: <ShoppingCart />
   },
   {
-    path:"/loginregisterform",
+    path:"/bonanza-ecommerce/loginregisterform",
     element:<Loginregisterform />
   }
 
