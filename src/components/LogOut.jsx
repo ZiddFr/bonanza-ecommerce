@@ -12,7 +12,7 @@ export const LogOut = () => {
       cartItems: 0
     }
     localStorage.setItem("userPreferences", JSON.stringify(userPreferences))
-    location.replace("http://localhost:5173/") // localhost for now ;)
+    location.replace("https://ZiddFr.github.io/bonanza-ecommerce/")
   }
   return(
     <>

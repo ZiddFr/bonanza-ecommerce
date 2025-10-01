@@ -126,7 +126,7 @@ export function Loginregisterform(){
               cartItems: productsIds
             }
             localStorage.setItem("userPreferences",JSON.stringify(userPreferences))
-            location.replace("http://localhost:5173/")
+            location.replace("https://ZiddFr.github.io/bonanza-ecommerce/")
           })
           .catch(error=>{
             console.log("Failed to get cart information due to the error: " + error)
