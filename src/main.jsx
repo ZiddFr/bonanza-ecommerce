@@ -10,7 +10,7 @@ import { Loginregisterform } from './components/Loginregisterform.jsx'
 
 const router = createBrowserRouter([
   {
-    path:"/",
+    path:"/bonanza-ecommerce",
     element: <App />,
   },
   {
