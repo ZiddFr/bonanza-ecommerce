@@ -32,7 +32,7 @@ export function CartButton({whatCartType,productId}){
       <NavLink
         reloadDocument
         id="logIn-register"
-        to={`/loginregisterform`}
+        to={`/bonanza-ecommerce/loginregisterform`}
         >
         <button className="generalCartButton guestCartType" onClick={redirectToLogIn}>
           <BsCart />
@@ -74,7 +74,7 @@ export function CartButton({whatCartType,productId}){
       <NavLink
         reloadDocument
         id="logIn-register"
-        to={`/loginregisterform`}
+        to={`/bonanza-ecommerce/loginregisterform`}
         >
         <button className="generalCartButton">
           <CiLogin />

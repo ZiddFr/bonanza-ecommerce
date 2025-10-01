@@ -53,7 +53,7 @@ export const SearchBar = () => {
                 <div className="NavLinkWrapper" style={{display: isFocused ? "block" : "none"}} key={id}>
                   <NavLink
                     reloadDocument
-                    to={`/displayproduct/${product.id}`}
+                    to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                     onClick={resetSearchBar}
                   >
                     <div className="showingProduct">

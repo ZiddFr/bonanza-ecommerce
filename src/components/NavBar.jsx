@@ -28,7 +28,7 @@ export const NavBar = ({logStatus,pageTheme,userId}) => {
                     <NavLink
                     id="userSettings"
                     reloadDocument
-                    to={`/userprofile/${userToken}`}>
+                    to={`/bonanza-ecommerce/userprofile/${userToken}`}>
                       <button>
                         <IoSettingsOutline />
                       </button>
@@ -36,7 +36,7 @@ export const NavBar = ({logStatus,pageTheme,userId}) => {
                     <NavLink
                     id="userCartButton"
                     reloadDocument
-                    to={`/shoppingcart/${userId}`}>
+                    to={`/bonanza-ecommerce/shoppingcart/${userId}`}>
                       <CartButton whatCartType={"loggedUserCartType"}/>
                     </NavLink>
                     <LogOut />

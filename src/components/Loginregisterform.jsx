@@ -180,7 +180,6 @@ export function Loginregisterform(){
         .catch(error => {
           console.log(error)
         })
-        //location.replace("http://localhost:5173/")
       }
     })
     document.querySelectorAll(".form__input").forEach(inputElement => {

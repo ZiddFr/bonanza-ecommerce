@@ -62,14 +62,14 @@ export function SelectedProdFromCategories({categories,productsIds}){
                       <div key={product["id"]} className="singleProductPreview">
                         <NavLink
                           reloadDocument
-                          to={`/displayproduct/${product.id}`}
+                          to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                         >
                           <img src={product["images"][0]} alt={product["title"]} className="productImg" />
                         </NavLink>
                           <div className="onlyTextDiv" style={{display:"flex",flexDirection:"column",marginTop: "17.333px"}}>
                             <NavLink
                             reloadDocument
-                            to={`/displayproduct/${product.id}`}
+                            to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                             >
                               <h3>{product["title"]}</h3>
                             </NavLink>
@@ -85,7 +85,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                         <p className="bannerOffer">{"OFFER"}</p>
                         <NavLink
                           reloadDocument
-                          to={`/displayproduct/${product.id}`}
+                          to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                         >
                           <img src={product["images"][0]} alt={product["title"]} className="productImg" />
                         </NavLink>
@@ -93,7 +93,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                           <p style={{color:"red",fontSize:"smaller",width:"fit-content",height:"fit-content",fontWeight:"bolder"}}>{"99%"}</p>
                           <NavLink
                           reloadDocument
-                          to={`/displayproduct/${product.id}`}
+                          to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                           >
                             <h3>{product["title"]}</h3>
                           </NavLink>  
@@ -122,14 +122,14 @@ export function SelectedProdFromCategories({categories,productsIds}){
                         <div key={product["id"]} className="singleProductPreview">
                           <NavLink
                             reloadDocument
-                            to={`/displayproduct/${product.id}`}
+                            to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                           >
                             <img src={product["images"][0]} alt={product["title"]} className="productImg" />
                           </NavLink> 
                           <div className="onlyTextDiv" style={{display:"flex",flexDirection:"column"}}>
                             <NavLink
                             reloadDocument
-                            to={`/displayproduct/${product.id}`}
+                            to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                             >
                               <h3>{product["title"]}</h3>
                             </NavLink>
@@ -145,7 +145,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                           <p className="bannerOffer">{"OFFER"}</p>
                           <NavLink
                             reloadDocument
-                            to={`/displayproduct/${product.id}`}
+                            to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                           >
                             <img src={product["images"][0]} alt={product["title"]} className="productImg" />
                           </NavLink>
@@ -153,7 +153,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                             <p style={{color:"red",fontSize:"smaller",width:"fit-content",height:"fit-content",fontWeight:"bolder"}}>{"99%"}</p>
                             <NavLink
                             reloadDocument
-                            to={`/displayproduct/${product.id}`}
+                            to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                             >
                             <h3>{product["title"]}</h3>
                             </NavLink>

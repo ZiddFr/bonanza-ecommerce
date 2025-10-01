@@ -64,14 +64,14 @@ export function Recomended({productsIds,logStatus}){
                     <div key={product["id"]} className="singleProductPreview">
                       <NavLink
                         reloadDocument
-                        to={`/displayproduct/${product.id}`}
+                        to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                       >                      
                         <img className="productImg" src={product["images"][0]} alt={product["title"]}></img>
                       </NavLink>
                       <div className="onlyTextDiv" style={{display:"flex", flexDirection:"column",marginTop: "17.333px"}}>
                         <NavLink
                         reloadDocument
-                        to={`/displayproduct/${product.id}`}
+                        to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                         >
                           <h3>{product["title"]}</h3>
                         </NavLink>
@@ -87,7 +87,7 @@ export function Recomended({productsIds,logStatus}){
                         <p className="bannerOffer">{"OFFER"}</p>
                         <NavLink
                           reloadDocument
-                          to={`/displayproduct/${product.id}`}
+                          to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                         >
                           <img className="productImg" src={product["images"][0]} alt={product["title"]} />
                         </NavLink>
@@ -95,7 +95,7 @@ export function Recomended({productsIds,logStatus}){
                           <p style={{color:"red",width:"fit-content",height:"fit-content",fontWeight:"bold"}}>{"99%"}</p>
                           <NavLink
                           reloadDocument
-                          to={`/displayproduct/${product.id}`}
+                          to={`/bonanza-ecommerce/displayproduct/${product.id}`}
                           >
                             <h3>{product["title"]}</h3>
                           </NavLink>
