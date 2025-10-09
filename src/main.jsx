@@ -1,8 +1,8 @@
-import { createHashRouter, createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import { App } from './App.jsx'
 
-// pages
+// pages/subindexes
 import { DisplayProduct } from "./components/DisplayProduct.jsx"
 import { UserProfile } from "./components/UserProfile.jsx"
 import { ShoppingCart } from "./components/ShoppingCart.jsx"
@@ -35,22 +35,24 @@ const hrouter = createHashRouter([
   {
     path:"/bonanza-ecommerce",
     element: <App />,
-  },
-  {
-    path:"/bonanza-ecommerce/displayproduct/:productId",
-    element: <DisplayProduct />
-  },
-  {
-    path:"/bonanza-ecommerce/userprofile/:userToken",
-    element: <UserProfile />
-  },
-  {
-    path:"/bonanza-ecommerce/shoppingcart/:userId",
-    element: <ShoppingCart />
-  },
-  {
-    path:"/bonanza-ecommerce/loginregisterform",
-    element:<Loginregisterform />
+    children:[
+      {
+        path:"/bonanza-ecommerce/displayproduct/:productId",
+        element: <DisplayProduct />
+      },
+      {
+        path:"/bonanza-ecommerce/userprofile/:userToken",
+        element: <UserProfile />
+      },
+      {
+        path:"/bonanza-ecommerce/shoppingcart/:userId",
+        element: <ShoppingCart />
+      },
+      {
+        path:"/bonanza-ecommerce/loginregisterform",
+        element:<Loginregisterform />
+      }
+    ]
   }
 ])
 
