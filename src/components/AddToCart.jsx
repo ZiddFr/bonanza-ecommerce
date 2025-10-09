@@ -16,6 +16,7 @@ export function AddToCart(){
         const data = response.data
         return data
       } catch (error) {
+        // I'll handle this another time, all work like it's the ideal case
         console.log("Failed to get products with error: " + error)
       }
     }
@@ -30,6 +31,7 @@ export function AddToCart(){
   },[])
 
   const callingStatus = () => {
+    // I don't remember this xD what was I doing?
     console.log(products)
     console.log(totalProducts)
   }

@@ -75,6 +75,7 @@ export function UserProfile(){
       const userHistorial = document.getElementById("userHistorial")
     })
     .catch(error=>{
+      // I'll handle this another time, all work like it's the ideal case
       console.log(error)
     })
   },[])

@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CartButton } from "./CartButton";
 import "./Recomended.css"
 
@@ -15,6 +15,7 @@ export function Recomended({productsIds,logStatus}){
         const data = response.data
         return data
       } catch (error) {
+        // I'll handle this another time, all work like it's the ideal case
         console.log("Failed to get products with error: " + error)
       }  
     }
@@ -62,19 +63,23 @@ export function Recomended({productsIds,logStatus}){
                 if(index<9){
                   return(
                     <div key={product["id"]} className="singleProductPreview">
-                      <NavLink
+                      <Link
                         reloadDocument
-                        to={`/bonanza-ecommerce/displayproduct/${product.id}`}
+                        to={{
+                          pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                        }}
                       >                      
                         <img className="productImg" src={product["images"][0]} alt={product["title"]}></img>
-                      </NavLink>
+                      </Link>
                       <div className="onlyTextDiv" style={{display:"flex", flexDirection:"column",marginTop: "17.333px"}}>
-                        <NavLink
+                        <Link
                         reloadDocument
-                        to={`/bonanza-ecommerce/displayproduct/${product.id}`}
+                        to={{
+                          pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                        }}
                         >
                           <h3>{product["title"]}</h3>
-                        </NavLink>
+                        </Link>
                         <p>{"$"+priceOfProduct}</p>
                       </div>
                       <CartButton productId={product["id"]} whatCartType={"productCartType"} />
@@ -85,20 +90,24 @@ export function Recomended({productsIds,logStatus}){
                     return(
                       <div key={product["id"]} className="singleProductPreview">
                         <p className="bannerOffer">{"OFFER"}</p>
-                        <NavLink
+                        <Link
                           reloadDocument
-                          to={`/bonanza-ecommerce/displayproduct/${product.id}`}
+                          to={{
+                            pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                          }}
                         >
                           <img className="productImg" src={product["images"][0]} alt={product["title"]} />
-                        </NavLink>
+                        </Link>
                         <div className="onlyTextDiv" style={{display:"flex",flexDirection:"column"}}>
                           <p style={{color:"red",width:"fit-content",height:"fit-content",fontWeight:"bold"}}>{"99%"}</p>
-                          <NavLink
+                          <Link
                           reloadDocument
-                          to={`/bonanza-ecommerce/displayproduct/${product.id}`}
+                          to={{
+                            pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                          }}
                           >
                             <h3>{product["title"]}</h3>
-                          </NavLink>
+                          </Link>
                           <div style={{display:"flex",flexDirection:"row"}}>
                             <p style={{color:"green", fontSize:"x-large"}}>{"$"+offerPrice}</p>
                             <p style={{color:"gray",textDecoration:"line-through",fontSize:"smaller"}}>{"$"+priceOfProduct}</p>

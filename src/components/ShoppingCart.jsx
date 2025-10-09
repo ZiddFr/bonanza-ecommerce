@@ -44,9 +44,6 @@ export const ShoppingCart = () => {
     .then(res=>{
       const cartData = res.data
       const cartSection = document.getElementById("cartSection")
-      // the userId is not related to the user id from the users link. I'll user the index id to link the user with the cart
-      //const primaryDiv = document.createElement("div")
-      //primaryDiv.setAttribute("class","primaryDiv")
       for(let i=0; i<cartData["products"].length;i++){
         const secondaryDiv = document.createElement("div")
         secondaryDiv.setAttribute("class","secondaryDiv")
@@ -84,7 +81,6 @@ export const ShoppingCart = () => {
         secondaryDiv.append(allTextDiv)
         cartSection.append(secondaryDiv)
       }
-      //cartSection.append(primaryDiv)
       const anotherTextDiv = document.createElement("div")
       anotherTextDiv.setAttribute("class","anotherTextDiv")
       const totalProducts = document.createElement("p")
@@ -104,6 +100,7 @@ export const ShoppingCart = () => {
       cartSection.append(anotherTextDiv)
     })
     .catch(error=>{
+      // I'll handle this properly another time, all work like it's the ideal case
       console.log(error)
       guestCart()
     })

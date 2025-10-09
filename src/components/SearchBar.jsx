@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { NavLink} from "react-router-dom"
+import { Link} from "react-router-dom"
 //css stuff
 import "./SearchBar.css"
 export const SearchBar = () => {
@@ -15,6 +15,10 @@ export const SearchBar = () => {
       })
       setResults(searchResults)
     })
+    .catch(error=>{
+      // I'll handle this another time, all work like it's the ideal case
+      console.log("Error: " + error)
+    })
   }
   const handleChange = (value) => {
     setInput(value)
@@ -24,10 +28,10 @@ export const SearchBar = () => {
   useEffect(()=>{
     const searchBar = document.getElementById("searchBar")
     searchBar.addEventListener("focus",()=>{
-      setIsFocused(true) // muestra NavLinkWrapper y sus nodos hijos
+      setIsFocused(true) 
     })
     searchBar.addEventListener("blur",()=>{
-      setIsFocused(false) // esconde NavLinkWrapper y sus nodos hijos
+      setIsFocused(false)
     })
     const searchResults = document.getElementById("searchResults")
     searchResults.addEventListener("mousedown",(e)=>{
@@ -51,9 +55,11 @@ export const SearchBar = () => {
             results.map((product,id)=>{
               return(
                 <div className="NavLinkWrapper" style={{display: isFocused ? "block" : "none"}} key={id}>
-                  <NavLink
+                  <Link
                     reloadDocument
-                    to={`/bonanza-ecommerce/displayproduct/${product.id}`}
+                    to={{
+                      pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                    }}
                     onClick={resetSearchBar}
                   >
                     <div className="showingProduct">
@@ -65,7 +71,7 @@ export const SearchBar = () => {
                         </p>
                       </div>
                     </div>
-                  </NavLink>
+                  </Link>
                 </div>
               )
             })

@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Logo } from './Logo.jsx'
 import { SearchBar } from './SearchBar.jsx'
 import { LogOut } from './LogOut.jsx'
 import { CartButton } from "./CartButton.jsx"
-import { IoSettingsOutline } from "react-icons/io5";
+import { IoSettingsOutline } from "react-icons/io5"
 //import { PageThemes } from './PageThemes.jsx'
 import './NavBar.css'
 
@@ -13,7 +13,7 @@ export const NavBar = ({logStatus,pageTheme,userId}) => {
     const userToken = cookie.split("=")[1]
     return userToken
   }
-  const userToken = requestLogStatus()
+  const userToken = requestLogStatus() // Yes, this () was supose to be an axios/fetch thing but I just thought it'll be better if I worked with the token
   return(
     <>
       <section id="NavBar-wrapper" className={`NavBar-wrapper ${pageTheme}`}>
@@ -25,20 +25,27 @@ export const NavBar = ({logStatus,pageTheme,userId}) => {
               return(
                 <>
                   <div className="navBarButtons userButtons">
-                    <NavLink
+                    <Link
                     id="userSettings"
                     reloadDocument
-                    to={`/bonanza-ecommerce/userprofile/${userToken}`}>
+                    to={{
+                      pathname: `/bonanza-ecommerce/userprofile/${userToken}`
+                    }}
+                    >
                       <button>
                         <IoSettingsOutline />
                       </button>
-                    </NavLink>
-                    <NavLink
+
+                    </Link>
+                    <Link
                     id="userCartButton"
                     reloadDocument
-                    to={`/bonanza-ecommerce/shoppingcart/${userId}`}>
+                    to={{
+                      pathname: `/bonanza-ecommerce/shoppingcart/${userId}`
+                    }}
+                    >
                       <CartButton whatCartType={"loggedUserCartType"}/>
-                    </NavLink>
+                    </Link>
                     <LogOut />
                   </div>
                 </>

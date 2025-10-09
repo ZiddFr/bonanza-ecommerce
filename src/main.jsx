@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter, createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import { App } from './App.jsx'
 
@@ -7,7 +7,7 @@ import { DisplayProduct } from "./components/DisplayProduct.jsx"
 import { UserProfile } from "./components/UserProfile.jsx"
 import { ShoppingCart } from "./components/ShoppingCart.jsx"
 import { Loginregisterform } from './components/Loginregisterform.jsx'
-
+/*
 const router = createBrowserRouter([
   {
     path:"/bonanza-ecommerce",
@@ -29,10 +29,32 @@ const router = createBrowserRouter([
     path:"/bonanza-ecommerce/loginregisterform",
     element:<Loginregisterform />
   }
-
+])
+*/
+const hrouter = createHashRouter([
+  {
+    path:"/bonanza-ecommerce",
+    element: <App />,
+  },
+  {
+    path:"/bonanza-ecommerce/displayproduct/:productId",
+    element: <DisplayProduct />
+  },
+  {
+    path:"/bonanza-ecommerce/userprofile/:userToken",
+    element: <UserProfile />
+  },
+  {
+    path:"/bonanza-ecommerce/shoppingcart/:userId",
+    element: <ShoppingCart />
+  },
+  {
+    path:"/bonanza-ecommerce/loginregisterform",
+    element:<Loginregisterform />
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <RouterProvider router={router} />
+  <RouterProvider router={hrouter} />
 )

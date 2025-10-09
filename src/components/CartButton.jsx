@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom"
 import { useMemo } from 'react'
+import { Link } from "react-router-dom"
 import { BsCart, BsCartPlus, BsCartPlusFill, BsCartDash, BsCartDashFill, BsCartCheckFill, BsCartXFill } from 'react-icons/bs'
 import { CiLogin } from "react-icons/ci";
 import "./CartButton.css"
@@ -29,16 +29,26 @@ export function CartButton({whatCartType,productId}){
   }
   const guestType = useMemo(()=>{
     return(
+      <Link 
+      id="logIn-register"
+      reloadDocument
+      to={{
+        pathname: "/bonanza-ecommerce/loginregisterform"
+      }}
+      >
+        <button className="generalCartButton guestCartType" onClick={redirectToLogIn}>
+          <BsCart />
+        </button>
+      </Link>
+/*      
       <NavLink
         reloadDocument
         id="logIn-register"
         to={`/bonanza-ecommerce/loginregisterform`}
         >
-        <button className="generalCartButton guestCartType" onClick={redirectToLogIn}>
-          <BsCart />
-        </button>
       </NavLink>
-    )
+*/
+      )
   })
   const productForGuestCartType = useMemo(()=>{
       return(
@@ -71,15 +81,17 @@ export function CartButton({whatCartType,productId}){
   })
   const canLogIn = useMemo(()=>{
     return(
-      <NavLink
+      <Link
         reloadDocument
         id="logIn-register"
-        to={`/bonanza-ecommerce/loginregisterform`}
+        to={{
+          pathname: `/bonanza-ecommerce/loginregisterform`
+        }}
         >
         <button className="generalCartButton">
           <CiLogin />
         </button>
-      </NavLink>
+      </Link>
     )
   })
 

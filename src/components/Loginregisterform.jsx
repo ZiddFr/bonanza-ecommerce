@@ -4,6 +4,7 @@ import axios from "axios";
 import '../Root.css'
 import './Loginregisterform.css'
 
+// I need to do a better handle error log-in intents but when I learned I can't register/add users it demotivated me, I'll do it in my own DB someday,  don't wait for it :B
 function TextLink({linkTo,linkId,textInsideLink}){
   return(
     <>
@@ -134,6 +135,7 @@ export function Loginregisterform(){
         })
       })
       .catch(error =>{
+        // I'll handle this another time, all work like it's the ideal case
         console.log("Failed to login due to error: " + error)
         setFormMessage(loginForm, "Error", "Invalid username or password.")
       })
@@ -178,6 +180,7 @@ export function Loginregisterform(){
           localStorage.setItem("userPreferences",JSON.stringify(userPreferences))
         })
         .catch(error => {
+          // I'll handle this another time, all work like it's the ideal case
           console.log(error)
         })
       }

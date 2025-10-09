@@ -22,6 +22,7 @@ export const DisplayProduct = () =>{
         const data = response.data
         return data
       } catch (error) {
+        // I'll handle this another time, all work like it's the ideal case
         console.log(error)
         didntWorkSuchWow()
       }

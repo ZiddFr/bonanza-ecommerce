@@ -1,7 +1,7 @@
 import { useEffect,useState } from 'react'
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom"
 import axios from 'axios'
-import { CartButton } from './CartButton';
+import { CartButton } from './CartButton'
 import { GrPrevious } from "react-icons/gr"
 import { GrNext } from "react-icons/gr"
 import './OffersSection.css'
@@ -15,6 +15,7 @@ export const OffersSection = ({productsIds,pageTheme}) => {
         const data = response.data
         return data
       } catch (error) {
+        // I'll handle this another time, all work like it's the ideal case
         console.log("Error getting products for display as offers because of: " +error)
       }
     }
@@ -27,19 +28,23 @@ export const OffersSection = ({productsIds,pageTheme}) => {
         const offer = (product["price"] - product["price"]*0.99).toFixed(2)
         return(
           <div key={product["id"]} className="forEachOffer">
-            <NavLink
+            <Link
             reloadDocument
-            to={`/displayproduct/${product.id}`}
+            to={{
+              pathname:`/bonanza-ecommerce/displayproduct/${product.id}`
+            }}
             >
               <img className="productOffer-img" src={product["images"][0]} alt={product["title"]} />
-            </NavLink>
+            </Link>
             <div className="previewText">
-              <NavLink
+              <Link
               reloadDocument
-              to={`/displayproduct/${product.id}`}
+              to={{
+                pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+              }}
               >
                 <h3 className="preview_offer-title" title={product["title"]}>{product["title"]}</h3>
-              </NavLink>
+              </Link>
               <p className="descriptionOffer">{product["description"]}</p>
               <h3 className="OfferPrice">{offer}</h3>
               <h3 className="originalPrice">{product["price"]}</h3>
