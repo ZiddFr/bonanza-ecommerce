@@ -58,7 +58,7 @@ export const SearchBar = () => {
                   <Link
                     reloadDocument
                     to={{
-                      pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                      pathname: `/displayproduct/${product.id}`
                     }}
                     onClick={resetSearchBar}
                   >

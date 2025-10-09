@@ -31,7 +31,7 @@ export const OffersSection = ({productsIds,pageTheme}) => {
             <Link
             reloadDocument
             to={{
-              pathname:`/bonanza-ecommerce/displayproduct/${product.id}`
+              pathname:`/displayproduct/${product.id}`
             }}
             >
               <img className="productOffer-img" src={product["images"][0]} alt={product["title"]} />
@@ -40,7 +40,7 @@ export const OffersSection = ({productsIds,pageTheme}) => {
               <Link
               reloadDocument
               to={{
-                pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                pathname: `/displayproduct/${product.id}`
               }}
               >
                 <h3 className="preview_offer-title" title={product["title"]}>{product["title"]}</h3>

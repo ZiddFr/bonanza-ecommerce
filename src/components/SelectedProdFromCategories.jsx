@@ -64,7 +64,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                         <Link
                           reloadDocument
                           to={{
-                            pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                            pathname: `/displayproduct/${product.id}`
                           }}
                         >
                           <img src={product["images"][0]} alt={product["title"]} className="productImg" />
@@ -73,7 +73,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                             <Link
                             reloadDocument
                             to={{
-                              pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                              pathname: `/displayproduct/${product.id}`
                             }}
                             >
                               <h3>{product["title"]}</h3>
@@ -91,7 +91,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                         <Link
                           reloadDocument
                           to={{
-                            pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                            pathname: `/displayproduct/${product.id}`
                           }}
                         >
                           <img src={product["images"][0]} alt={product["title"]} className="productImg" />
@@ -101,7 +101,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                           <Link
                           reloadDocument
                           to={{
-                            pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                            pathname: `/displayproduct/${product.id}`
                           }}
                           >
                             <h3>{product["title"]}</h3>
@@ -132,7 +132,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                           <Link
                             reloadDocument
                             to={{
-                              pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                              pathname: `/displayproduct/${product.id}`
                             }}
                           >
                             <img src={product["images"][0]} alt={product["title"]} className="productImg" />
@@ -141,7 +141,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                             <Link
                             reloadDocument
                             to={{
-                              pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                              pathname: `/displayproduct/${product.id}`
                             }}
                             >
                               <h3>{product["title"]}</h3>
@@ -159,7 +159,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                           <Link
                             reloadDocument
                             to={{
-                              pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                              pathname: `/displayproduct/${product.id}`
                             }}
                           >
                             <img src={product["images"][0]} alt={product["title"]} className="productImg" />
@@ -169,7 +169,7 @@ export function SelectedProdFromCategories({categories,productsIds}){
                             <Link
                             reloadDocument
                             to={{
-                              pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                              pathname: `/displayproduct/${product.id}`
                             }}
                             >
                             <h3>{product["title"]}</h3>

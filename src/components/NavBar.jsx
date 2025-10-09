@@ -29,7 +29,7 @@ export const NavBar = ({logStatus,pageTheme,userId}) => {
                     id="userSettings"
                     reloadDocument
                     to={{
-                      pathname: `/bonanza-ecommerce/userprofile/${userToken}`
+                      pathname: `/userprofile/${userToken}`
                     }}
                     >
                       <button>
@@ -41,7 +41,7 @@ export const NavBar = ({logStatus,pageTheme,userId}) => {
                     id="userCartButton"
                     reloadDocument
                     to={{
-                      pathname: `/bonanza-ecommerce/shoppingcart/${userId}`
+                      pathname: `/shoppingcart/${userId}`
                     }}
                     >
                       <CartButton whatCartType={"loggedUserCartType"}/>

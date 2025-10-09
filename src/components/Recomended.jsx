@@ -66,7 +66,7 @@ export function Recomended({productsIds,logStatus}){
                       <Link
                         reloadDocument
                         to={{
-                          pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                          pathname: `/displayproduct/${product.id}`
                         }}
                       >                      
                         <img className="productImg" src={product["images"][0]} alt={product["title"]}></img>
@@ -75,7 +75,7 @@ export function Recomended({productsIds,logStatus}){
                         <Link
                         reloadDocument
                         to={{
-                          pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                          pathname: `/displayproduct/${product.id}`
                         }}
                         >
                           <h3>{product["title"]}</h3>
@@ -93,7 +93,7 @@ export function Recomended({productsIds,logStatus}){
                         <Link
                           reloadDocument
                           to={{
-                            pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                            pathname: `/displayproduct/${product.id}`
                           }}
                         >
                           <img className="productImg" src={product["images"][0]} alt={product["title"]} />
@@ -103,7 +103,7 @@ export function Recomended({productsIds,logStatus}){
                           <Link
                           reloadDocument
                           to={{
-                            pathname: `/bonanza-ecommerce/displayproduct/${product.id}`
+                            pathname: `/displayproduct/${product.id}`
                           }}
                           >
                             <h3>{product["title"]}</h3>
