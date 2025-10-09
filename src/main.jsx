@@ -33,23 +33,23 @@ const router = createBrowserRouter([
 */
 const hrouter = createHashRouter([
   {
-    path:"/bonanza-ecommerce",
+    path:"/",
     element: <App />,
     children:[
       {
-        path:"/bonanza-ecommerce/displayproduct/:productId",
+        path:"/displayproduct/:productId",
         element: <DisplayProduct />
       },
       {
-        path:"/bonanza-ecommerce/userprofile/:userToken",
+        path:"/userprofile/:userToken",
         element: <UserProfile />
       },
       {
-        path:"/bonanza-ecommerce/shoppingcart/:userId",
+        path:"/shoppingcart/:userId",
         element: <ShoppingCart />
       },
       {
-        path:"/bonanza-ecommerce/loginregisterform",
+        path:"/loginregisterform",
         element:<Loginregisterform />
       }
     ]
