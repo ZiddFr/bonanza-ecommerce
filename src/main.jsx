@@ -35,25 +35,23 @@ const hrouter = createHashRouter([
   {
     path:"/",
     element: <App />,
-    children:[
-      {
-        path:"/displayproduct/:productId",
-        element: <DisplayProduct />
-      },
-      {
-        path:"/userprofile/:userToken",
-        element: <UserProfile />
-      },
-      {
-        path:"/shoppingcart/:userId",
-        element: <ShoppingCart />
-      },
-      {
-        path:"/loginregisterform",
-        element:<Loginregisterform />
-      }
-    ]
-  }
+  },
+  {
+    path:"/displayproduct/:productId",
+    element: <DisplayProduct />
+  },
+  {
+    path:"/userprofile/:userToken",
+    element: <UserProfile />
+  },
+  {
+    path:"/shoppingcart/:userId",
+    element: <ShoppingCart />
+  },
+  {
+    path:"/loginregisterform",
+    element:<Loginregisterform />
+  }  
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))

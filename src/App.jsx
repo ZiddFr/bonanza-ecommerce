@@ -143,12 +143,12 @@ export function App() {
     <div id="app" className={pageTheme}>
       <Loader pageTheme={pageTheme}/>
       <div id="main">
-        <Outlet />
         <NavBar logStatus={logStatus} pageTheme={pageTheme} userId={userId} />
         <OffersSection productsIds={productsIds} pageTheme={pageTheme}/>
         {recomended}
         {categoriesSection}
         <section className="politics">Hello, no politics</section>        
+        <Outlet />
       </div>
     </div>
   )

@@ -33,7 +33,7 @@ export function CartButton({whatCartType,productId}){
       id="logIn-register"
       reloadDocument
       to={{
-        pathname: "/bonanza-ecommerce/loginregisterform"
+        pathname: "/loginregisterform"
       }}
       >
         <button className="generalCartButton guestCartType" onClick={redirectToLogIn}>
