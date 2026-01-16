@@ -51,7 +51,7 @@ const hrouter = createHashRouter([
   {
     path:"/loginregisterform",
     element:<Loginregisterform />
-  }  
+  }
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
