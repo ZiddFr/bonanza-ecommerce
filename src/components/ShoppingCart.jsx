@@ -19,7 +19,7 @@ if (localStorage.getItem("userPreferences")) {
   }
 }
 export const ShoppingCart = () => {
-  const { userId } = useParams()
+  const { cartId } = useParams()
   const userPreferences = JSON.parse(localStorage.getItem("userPreferences"))
   const logStatus = userPreferences["logStatus"]
   const pageTheme = userPreferences["pageTheme"]
@@ -39,7 +39,7 @@ export const ShoppingCart = () => {
    
     axios({
       method: "GET",
-      url: `https://dummyjson.com/carts/${userId}`,
+      url: `https://dummyjson.com/carts/user/${cartId}`,
     })
     .then(res=>{
       const cartData = res.data
