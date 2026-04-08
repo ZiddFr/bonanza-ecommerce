@@ -12,7 +12,6 @@ Proyecto de e-commerce desarrollado con **React** como parte de mi portfolio per
 ## 🛠️ Tecnologías utilizadas
 - React 18
 - React Router DOM
-- Axios
 - Vite
 - Bun
 - CSS
