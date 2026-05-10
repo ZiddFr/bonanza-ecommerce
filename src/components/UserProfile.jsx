@@ -1,108 +1,66 @@
-import axios from "axios"
-import { Logo } from "./Logo"
-import { useEffect } from "react"
-import { LogOut } from "./LogOut"
-import { CartButton } from "./CartButton.jsx"
-import { useParams } from "react-router-dom"
+// Context
+import { UserStatus } from "../context/UserContext.jsx"
+// Services
+import { userInfo } from "../services/userInfo.js"
+// Hooks
+import { useContext,useState,useEffect } from "react"
+// Jsx
+import { Logo } from "./Logo.jsx"
+import { LogOut } from "./LogOut.jsx"
+import { InputForm } from "./InputForm.jsx"
+// Css
 import "./UserProfile.css"
-import '../Root.css'
+// TODO: implementar edición de datos cuando tenga mi DB.
 export function UserProfile(){
-  let pageTheme = ""
-  let userPreferences = {}
-  if(localStorage.getItem("userPreferences")) {
-    userPreferences = JSON.parse(localStorage.getItem("userPreferences"))
-    pageTheme = userPreferences["pageTheme"]
-  }
-
-
-  const { userToken } = useParams() 
+  const allUserStatus = useContext(UserStatus)
+  const [userData,setUserData] = useState({})
   useEffect(()=>{
-
-    axios({
-      method: "GET",
-      url: "https://dummyjson.com/auth/me",
-      headers: {
-        Authorization: `Bearer ${userToken}`
-      }
-    })
-    .then(res=>{
-      const userInfo = res.data
-      //console.log(typeof(res.data)) //object
-      const userData = document.getElementById("userData")
-      const userImg = document.createElement("img")
-      userImg.setAttribute("src",`${userInfo["image"]}`)
-      userImg.setAttribute("class","userImg")
-      const divTexts = document.createElement("div")
-      divTexts.setAttribute("class","divTexts")
-      const cnLabel = document.createElement("label")
-      cnLabel.innerText = "Name: "
-      const completeName = document.createElement("textarea")
-      completeName.innerText = `${userInfo["firstName"]} ${userInfo["lastName"]}`
-      completeName.setAttribute("readonly",true)
-      cnLabel.append(completeName)
-      const unLabel = document.createElement("label")
-      unLabel.innerText = "Username:"
-      const userName = document.createElement("textarea")
-      userName.innerText = `${userInfo["username"]}`
-      userName.setAttribute("readonly",true)
-      unLabel.append(userName)
-      const ueLabel = document.createElement("label")
-      ueLabel.innerText = "Email:"
-      const userEmail = document.createElement("textarea")
-      userEmail.innerText = `${userInfo["email"]}`
-      userEmail.setAttribute("readonly",true)
-      ueLabel.append(userEmail)
-      const urLabel = document.createElement("label")
-      urLabel.innerText = "Role:"
-      const userRole = document.createElement("textarea")
-      userRole.innerText = `${userInfo["role"]}`
-      userRole.setAttribute("readonly",true)
-      urLabel.append(userRole)
-      const ugLabel = document.createElement("label")
-      ugLabel.innerText = "Gender:"
-      const userGender = document.createElement("textarea")
-      userGender.innerText = `${userInfo["gender"]}`
-      userGender.setAttribute("readonly",true)
-      userData.append(userImg)
-      divTexts.append(urLabel) // user role
-      divTexts.append(cnLabel) // complete name
-      divTexts.append(unLabel) // username
-      ugLabel.append(userGender)
-      divTexts.append(ugLabel) // user gender
-      divTexts.append(ueLabel) // user email
-      userData.append(divTexts)
-      //
-      const userHistorial = document.getElementById("userHistorial")
-    })
-    .catch(error=>{
-      // I'll handle this another time, all work like it's the ideal case
-      console.log(error)
-    })
+    (async function (){
+       const data = await userInfo()
+       setUserData(data)
+    })()
   },[])
+  const handleChangeSubmit = () => {
+    // algo aqui
+  }
   return(
     <>
-      <span className={`${pageTheme}`}>
-        <section className="profileSettings">
-          <div className="commonBar">
-            <Logo />
-            <h1>Profile</h1>
-            <CartButton whatCartType={"loggedUserCartType"}/>
-            <LogOut />
+      <section className={`profileSettings ${allUserStatus.pageTheme}`}>
+        <div className="commonBar">
+          <Logo />
+          <h1>Profile</h1>
+          <LogOut />
+        </div>
+        <form className="form" id="userInformation" onSubmit={handleChangeSubmit}>
+          <div id="userData">
+            <img className="userImg" src={userData.image} alt={`Profile picture of ${userData.firstName} ${userData.lastName}`} />
+            <div className="divTexts">
+              <label htmlFor="completeName">Name:</label>
+              <InputForm inputType={"text"} name={"completeName"} value={`${userData.firstName} ${userData.lastName}`} readOnly />
+              <label htmlFor="userName">Username:</label>
+              <InputForm inputType={"text"} name={"userName"} readOnly value={userData.username} />
+              <label htmlFor="userEmail">Email</label>
+              <InputForm inputType={"text"} name={"userEmail"} readOnly value={userData.email} />
+              <label htmlFor="userRole">Role:</label>
+              <InputForm inputType={"text"} name={"userRole"} readOnly value={userData.role} />
+              <label htmlFor="userGender">Gender:</label>
+              <InputForm inputType={"text"} name={"userGender"} readOnly value={userData.gender} />
+            </div>
+            <button type="submit" href="" className="form__button">Change</button>
           </div>
-          <div id="userData"></div>
-          <div id="userHistorial">
-            <p>Order history:</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse eius dolor atque ratione quo odio natus perferendis? Libero neque ipsum pariatur reprehenderit sunt eligendi incidunt cumque ratione, iusto obcaecati rem?</p>
-          </div>
-          <div className="others">
-            <h2>Preferences:</h2>
-            <label>
-              <input type="checkbox" name="Notifications" id="pref-notifications" defaultChecked/>
-              You'll receive notifications about offers in your home page.
-            </label>
-          </div>
-        </section>
-      </span>
+        </form>
+        <div id="userHistorial">
+          <p>Order history:</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse eius dolor atque ratione quo odio natus perferendis? Libero neque ipsum pariatur reprehenderit sunt eligendi incidunt cumque ratione, iusto obcaecati rem?</p>
+        </div>
+        <div className="others">
+          <h2>Preferences:</h2>
+          <label>
+            <InputForm inputType={"checkbox"} name={"Notifications"} inputId={"pref-notifications"} defaultChecked={true}/>
+            You'll receive notifications about Hot Deals in your home page.
+          </label>
+        </div>
+      </section>
     </>
   )
 }

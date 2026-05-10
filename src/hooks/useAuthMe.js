@@ -1,5 +1,8 @@
+// Hooks
 import { useEffect, useState } from "react";
+// Custom Hooks
 import { useLocalStorage } from "./useLocalStorage";
+// Services
 import { authMe } from "../services/authMe";
 export function useAuthMe(){
   const [token,setToken] = useState(null)
@@ -11,7 +14,8 @@ export function useAuthMe(){
     const userData = authMe(accessToken)
     userData.then((data)=>{
       setUserId(data["id"])
-      setPageTheme("beMeMeBee")
+      const savedTheme = localStorage.getItem("pageTheme") ?? "faddingEmerald"
+      setPageTheme(savedTheme) // "beMeMeBee"
       setLogStatus(true)
       const userToken = document.cookie=`access_token=${data["accessToken"]}; SameSite=Strict; Secure`
       setToken(userToken)

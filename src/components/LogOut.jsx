@@ -1,22 +1,23 @@
+// hooks
+import { useNavigate } from "react-router-dom";
+
+// icons
 import { CiLogout } from "react-icons/ci";
+
+// js
+
+// css
 import "./LogOut.css"
 
 export const LogOut = () => {
-  const logOut = ()=>{
-    document.cookie = "token=; path=/;"
-    let userPreferences = JSON.parse(localStorage.getItem("userPReferences"))
-    userPreferences = {
-      userId: 0,
-      pageTheme: "faddingEmerald",
-      logStatus: false,
-      cartItems: 0
-    }
-    localStorage.setItem("userPreferences", JSON.stringify(userPreferences))
-    location.replace("https://ZiddFr.github.io/bonanza-ecommerce/")
+  const navigate = useNavigate()
+  const handleLogOut = () =>{
+    document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Strict"
+    navigate('/')
   }
   return(
     <>
-      <button id="logOutButton" onClick={logOut}><CiLogout /></button>
+      <button id="logOutButton" onClick={handleLogOut}><CiLogout/></button>
     </>
   )
 }

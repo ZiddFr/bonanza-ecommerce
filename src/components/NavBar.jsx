@@ -1,69 +1,61 @@
-import { Link } from "react-router-dom"
+// hooks
+import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
+// context
+import { UserStatus } from '../context/UserContext.jsx'
+
+// jsx
 import { Logo } from './Logo.jsx'
 import { SearchBar } from './SearchBar.jsx'
 import { LogOut } from './LogOut.jsx'
-import { CartButton } from "./CartButton.jsx"
-import { IoSettingsOutline } from "react-icons/io5"
-//import { PageThemes } from './PageThemes.jsx'
+
+// js
+
+// css
 import './NavBar.css'
 
-export const NavBar = ({logStatus,pageTheme,userId}) => {
-  const requestLogStatus = () => {
-    let cookie = document.cookie
-    const userToken = cookie.split("=")[1]
-    return userToken
-  }
-  const userToken = requestLogStatus() // Yes, this () was supose to be an axios/fetch thing but I just thought it'll be better if I worked with the token
-  return(
-    <>
-      <section id="NavBar-wrapper" className={`NavBar-wrapper ${pageTheme}`}>
-        <Logo />
-        <SearchBar />
-        {
-          (()=>{
-            if(logStatus == true) {
-              return(
-                <>
-                  <div className="navBarButtons userButtons">
-                    <Link
-                    id="userSettings"
-                    reloadDocument
-                    to={{
-                      pathname: `/userprofile/${userToken}`
-                    }}
-                    >
-                      <button>
-                        <IoSettingsOutline />
-                      </button>
+// icons
+import { IoSettingsOutline } from "react-icons/io5"
+import { BsCart } from 'react-icons/bs'
+import { CiLogin } from "react-icons/ci";
 
-                    </Link>
-                    <Link
-                    id="userCartButton"
-                    reloadDocument
-                    to={{
-                      pathname: `/shoppingcart/${userId}`
-                    }}
-                    >
-                      <CartButton whatCartType={"loggedUserCartType"}/>
-                    </Link>
-                    <LogOut />
-                  </div>
-                </>
-              )
-            } else if ( logStatus == false ){
-              userId = "guest"
-              return(
-                <>
-                  <div className="navBarButtons guestButtons">
-                    <CartButton whatCartType={"guestUserCartType"} />
-                    <CartButton whatCartType={"canLogIn"}/>
-                  </div>
-                </>
-              )
-            }
-          })()
-        }
-      </section>
-    </>
-  )
+export const NavBar = () => {
+  const allUserContext = useContext(UserStatus)
+  const navigate = useNavigate()
+  function handleUserSettings(){
+    navigate(`/userprofile/${allUserContext.userId}`)
+  }
+  function handleShoppingCart(){
+    navigate(`/shoppingcart/${allUserContext.userId}`)
+  }
+  function handleLoginForm(){
+    navigate(`/loginregisterform`)
+  }
+  if(allUserContext.logStatus){
+    return(
+      <>
+        <section id="NavBar-wrapper" className={`NavBar-wrapper ${allUserContext.pageTheme}`}>
+          <Logo />
+          <SearchBar />
+          <div className="navBarButtons userButtons">
+            <button onClick={handleUserSettings}><IoSettingsOutline /></button>
+            <button className="generalCartButton userCartType" onClick={handleShoppingCart}><BsCart /></button>
+            <LogOut />
+          </div>
+        </section>
+      </>
+    )
+  } else {
+    return(
+      <>
+        <section id="NavBar-wrapper" className={`NavBar-wrapper faddingEmerald`}>
+          <Logo />
+          <SearchBar />
+          <div className="navBarButtons guestButtons">
+            <button id="logIn-register" onClick={handleLoginForm}><CiLogin/></button>
+          </div>
+        </section>
+      </>
+    )  
+  }
 }

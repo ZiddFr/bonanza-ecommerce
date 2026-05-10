@@ -1,83 +1,72 @@
-import { useEffect, useState } from "react"
-import { Link} from "react-router-dom"
-//css stuff
+// Services
+import { search } from "../services/search.js"
+// React hooks
+import { useEffect,useState,useRef } from "react"
+// React-router-dom hooks
+import { useNavigate } from "react-router-dom"
+// Components
+import { SearchResults } from "./SearchResults.jsx"
+import { InputForm } from "./InputForm.jsx"
+// Css
 import "./SearchBar.css"
 export const SearchBar = () => {
-  const [input,setInput] = useState("")
+  const searchBarRef = useRef(null)
+  const navigate = useNavigate()
+  const [searchInput,setSearchInput] = useState("")
   const [results,setResults] = useState([])
-  const [isFocused,setIsFocused] = useState()
-  const gettingProducts = (value) => {
-    fetch('https://dummyjson.com/products')
-    .then(response => response.json())
-    .then(data=>{
-      const searchResults = data["products"].filter((product)=>{
-        return value && product && product.title && product.title.toLowerCase().includes(value)
-      })
-      setResults(searchResults)
-    })
-    .catch(error=>{
-      // I'll handle this another time, all work like it's the ideal case
-      console.log("Error: " + error)
-    })
+  const [isFocused,setIsFocused] = useState(false)
+  const handleNavigate = () => {
+    navigate(`/catalog?q=${searchInput}`)
   }
   const handleChange = (value) => {
-    setInput(value)
-    gettingProducts(value)
+    setSearchInput(value)
+    if(!value){
+      setResults({})
+      return
+    }
+    (async function(){
+      try {
+        const searchResponse = await search(value)
+        setResults(searchResponse)
+      } catch (error) {
+        console.error("Error: ", error)
+        //Tal vez agregar un pop-up mostrando error
+        // de búsqueda o no hay productos con ese input
+        setResults({})
+      }
+    })()
   }
-
-  useEffect(()=>{
-    const searchBar = document.getElementById("searchBar")
-    searchBar.addEventListener("focus",()=>{
-      setIsFocused(true) 
-    })
-    searchBar.addEventListener("blur",()=>{
+  const handleClickOutside = (e) =>{
+    if(searchBarRef.current && !searchBarRef.current.contains(e.target)){
       setIsFocused(false)
-    })
-    const searchResults = document.getElementById("searchResults")
-    searchResults.addEventListener("mousedown",(e)=>{
-      e.preventDefault()
-      searchBar.focus()
-    })
-  },[])
-
-  const resetSearchBar = () =>{
-    setInput("")
-    setResults([])
+    }
   }
+  useEffect(()=>{
+      document.addEventListener("click",handleClickOutside)
+    return () =>{
+      document.removeEventListener("click",handleClickOutside)
+    }
+  },[])
   return (
     <>
-      <div id="searchBar_wrapper">
-        <input value={input}
-        onChange={e=>{handleChange(e.target.value)}}
-        type="search" name="searchBar" id="searchBar" />
-        <div id="searchResults">
-          {
-            results.map((product,id)=>{
-              return(
-                <div className="NavLinkWrapper" style={{display: isFocused ? "block" : "none"}} key={id}>
-                  <Link
-                    reloadDocument
-                    to={{
-                      pathname: `/displayproduct/${product.id}`
-                    }}
-                    onClick={resetSearchBar}
-                  >
-                    <div className="showingProduct">
-                      <p className="titleProduct" style={{fontWeight:"bold"}}>{product.title}</p>
-                      <div className="categoryContainer" style={{display:"flex"}}>
-                        <p className="pCategory" style={{fontSize:"smaller"}}>Category: <br></br></p> 
-                        <p className="categoryProduct" style={{fontSize:"large"}}>
-                          {product.category}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              )
-            })
-          }
-        </div>
+    <form onSubmit={(e)=>{
+      e.preventDefault()
+      handleNavigate()}} id="searchBar_wrapper" >
+      <div ref={searchBarRef} className="searchBar_wrapper">
+      <InputForm inputType={"search"} name={"searchBar"} inputId={"searchBar"} textPlaceholder={"SearchBar..."} onChange={e=>{handleChange(e.target.value)}} onClick={()=>{
+        setIsFocused(prev => !prev)
+      }} />
       </div>
+      <div id="searchResults">
+        {isFocused &&
+          results.map((product,index)=>{
+            return(
+              <SearchResults key={index} product={product} />
+            )
+          })
+        }
+      </div>
+    </form>
     </>
   )
 }

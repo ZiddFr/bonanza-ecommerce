@@ -1,4 +1,6 @@
+// Function
 import { createContext } from 'react'
+// Custom Hooks
 import { useAuthMe } from '../hooks/useAuthMe.js'
 export const UserStatus = createContext(null)
 export function UserContext({children}){

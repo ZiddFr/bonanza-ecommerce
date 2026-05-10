@@ -1,35 +1,14 @@
+// Hooks
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-// js
+// Js
 import { logInRegister } from "../services/logInRegister";
-// jsx
+// Jsx
 import { Logo } from "./Logo";
-
-// css
-import '../Root.css'
+import { InputForm } from "./InputForm.jsx";
+import { TextLink } from "./TextLink.jsx";
+// Css
 import './Loginregisterform.css'
-
-function TextLink({linkTo,linkId,textInsideLink, onClick}){
-  return(
-    <>
-      <p className="form__text">
-        <a href={linkTo} id={linkId} className="form__link" rel="noopener noreferrer" onClick={onClick}>{textInsideLink}</a>
-      </p>
-    </>
-  )
-}
-function Inputgroup({inputType,inputId,focused,textPlaceholder,onChange,value}){
-  return(
-    <>
-      <div className="form__input-group">
-        <input type={inputType} className="form__input" id={inputId} autoFocus={focused} placeholder={textPlaceholder} onChange={onChange} value={value} />
-        <div className="form__input-error-message"></div>
-      </div>
-    </>
-  )
-}
-
 export function Loginregisterform(){
   const navigate = useNavigate()
   const [userName,setUserName] = useState("")
@@ -108,12 +87,12 @@ export function Loginregisterform(){
               <form className="form" id="login" onSubmit={handleLoginSubmit}>
                 <h1 className="form__title">Login</h1>
                 <div className={`form__message--${formMessage}`}>{messageContent}</div>
-                <Inputgroup inputType={"text"} inputId={"loginUsername"} textPlaceholder={"Username"} focused={true} 
+                <InputForm inputType={"text"} inputId={"loginUsername"} textPlaceholder={"Username"} focused={true} 
                 onChange={(e)=> 
                   handleInputChange(setUserName,e.target.value)
                 }
                 value={userName}/>
-                <Inputgroup inputType={"password"} inputId={"loginPassword"} textPlaceholder={"Password"} 
+                <InputForm inputType={"password"} inputId={"loginPassword"} textPlaceholder={"Password"} 
                 onChange={(e)=>
                   handleInputChange(setUserPassword,e.target.value)
                 }
@@ -137,25 +116,25 @@ export function Loginregisterform(){
               <form className="form" id="createAccount" onSubmit={handleRegisterSubmit}>
                 <h1 className="form__title">Create Account</h1>
                 <div className={`form__message--${formMessage}`}>{messageContent}</div>
-                <Inputgroup inputType={"text"} inputId={"signupUsername"} textPlaceholder={"Username"} focused={true} 
+                <InputForm inputType={"text"} inputId={"signupUsername"} textPlaceholder={"Username"} focused={true} 
                 onChange={(e)=>
                   handleInputChange(setUserName,e.target.value)
                 }
                 value={userName}
                 />
-               <Inputgroup inputType={"text"} inputId={"signupEmail"} textPlaceholder={"Email Address"} 
+               <InputForm inputType={"text"} inputId={"signupEmail"} textPlaceholder={"Email Address"} 
                 onChange={(e)=>{
                   handleInputChange(setUserEmail,e.target.value)
                 }}
                 value={userEmail}
                 /> 
-                <Inputgroup inputType={"password"} inputId={"signupPassword"} textPlaceholder={"Password"} 
+                <InputForm inputType={"password"} inputId={"signupPassword"} textPlaceholder={"Password"} 
                 onChange={(e)=>
                   handleInputChange(setUserPassword,e.target.value)
                 }
                   value={userPassword}
                   />  
-                <Inputgroup inputType={"password"} inputId={"signupConfirPassword"} textPlaceholder={"Confirm password"} 
+                <InputForm inputType={"password"} inputId={"signupConfirPassword"} textPlaceholder={"Confirm password"} 
                 onChange={(e)=>
                   handleInputChange(setPassConfirmation,e.target.value)
                 }

@@ -1,25 +1,28 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-export function useCart(userId){
+// Services
+import { userCart } from "../services/userCart";
+// Context
+import { UserStatus } from "../context/UserContext";
+// Hooks
+import { useContext,useEffect,useState } from "react";
+
+export function useCart(){
+  const allUserContext = useContext(UserStatus)
   const [cartIds, setCartsIds] = useState([])
   useEffect(()=>{
-    if(!userId) return
+    if(!allUserContext.userId) return // revisar !userId y userId == 0
     let cartDataIds = []
-    axios({
-      method: "GET",
-      url: `https://dummyjson.com/carts/user/${userId}`,
-    })
-    .then(response=>{
-      const data = response.data
-      for(let i=0;i<data["carts"].length;i++){
-        cartDataIds.push(data["carts"][i]["id"])
+    (async function(){
+      try {
+        const cartData = await userCart(allUserContext.userId)
+        for(let i=0;i<cartData["carts"].length;i++){
+          cartDataIds.push(cartData["carts"][i]["id"])
+        }
+        setCartsIds(cartDataIds)
+      } catch (error) {
+        console.error("Couldn't get cart data due to: ", error)
+        setCartsIds([])
       }
-      setCartsIds(cartDataIds)
-    })
-    .catch (error=>{
-      cartIds = []
-      console.log("Error reading cart items: ", error)
-    })
-  },[userId])
+    })()
+  },[])
   return cartIds
 }

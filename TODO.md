@@ -11,3 +11,11 @@
 --- I'll copy the structure of the dummyjson database (not all)
 -- Users data: Need fake photos, write so much text, invent some predefined users data (id, full name, username, password, email, etc.)
 -- Producst data: photos of products, rate, stock...
+-- CartButton.jsx icons
+/**
+ * BsCart
+ * BsCartPlusFill
+ * BsCartDashFill
+ * BsCartCheckFill
+ * BsCartXFill
+ */

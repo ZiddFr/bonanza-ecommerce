@@ -123,14 +123,14 @@
     color: black;
     background-color: var(--secondary-femerald);
   }
-  /* Offer Section */
-  #offers__section__wrapper{
+  /* Hot Deal Section */
+  #hotDeal__section__wrapper{
     background-image: linear-gradient(180deg,#62D2A2, #62D2A2,#1FAB89) !important;
   }
-  .forEachOffer {
+  .forEachHotDeal {
     background-color: var(--tertiary-femerald);
   }
-  .forEachOffer:hover {
+  .forEachHotDeal:hover {
     background-color: var(--quaternary-femerald);
     .generalCartButton{
       background-color: var(--secondary-femerald);
@@ -257,14 +257,14 @@
     background-color: var(--secondary-beeme);
     color: var(--quaternary-beeme);
   }
-  /* Offer Section */
-  #offers__section__wrapper{
+  /* Hot Deals Section */
+  #hotDeals__section__wrapper{
     background-image: linear-gradient(180deg,#393E46, #393E46,#222831) !important;
   }
-  .forEachOffer {
+  .forEachHotDeal {
     background-color: var(--tertiary-beeme);
   }
-  .forEachOffer:hover {
+  .forEachHotDeal:hover {
     background-color: var(--quaternary-beeme);
     .generalCartButton{
       background-color: var(--tertiary-beeme);

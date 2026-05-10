@@ -1,11 +1,14 @@
-import { Outlet } from 'react-router-dom'
-import { useContext } from 'react'
-// components
-import { Loader } from './components/Loader.jsx'
-// jsx
+// Context
 import { UserStatus } from './context/UserContext.jsx'
-// js
-// css
+// Hooks
+import { useContext } from 'react'
+// React Component
+import { Outlet } from 'react-router-dom'
+// Jsx
+import { Loader } from './components/Loader.jsx'
+// Js
+
+// Css
 import './Root.css'
 import './App.css'
 

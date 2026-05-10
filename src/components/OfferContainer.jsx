@@ -1,3 +1,4 @@
+// css
 import './OfferContainer.css'
 export const OfferContainer = ({offer}) => {
   return(

@@ -1,8 +1,11 @@
-import { createHashRouter, RouterProvider } from 'react-router-dom'
+// Library
 import ReactDOM from 'react-dom/client'
-// jsx
-import { App } from './App.jsx'
+// Context
 import { UserContext } from './context/UserContext.jsx'
+// Data Router Function, Primary Component
+import { createHashRouter, RouterProvider } from 'react-router-dom'
+// Jsx
+import { App } from './App.jsx'
 import { MainPage } from './components/MainPage.jsx'
 // pages/subindexes
 import { DisplayProduct } from "./components/DisplayProduct.jsx"
@@ -25,11 +28,11 @@ const hrouter = createHashRouter([
         element: <DisplayProduct />
       },
       {
-        path:"userprofile/:userToken",
+        path:"userprofile/",
         element: <UserProfile />
       },
       {
-        path:"shoppingcart/:cartId",
+        path:"shoppingcart/",
         element: <ShoppingCart />
       },
       {
@@ -44,7 +47,6 @@ const hrouter = createHashRouter([
     ]
   }
 ])
-
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <UserContext>

@@ -1,5 +1,5 @@
+// Hooks
 import { useState, useEffect } from "react";
-//ui -> user interface --> cambiarlo a userPreferences(?)
 export function useLocalStorage(uiKey,uiInitialValue){
   const [value,setValue] = useState(()=>{
     try {

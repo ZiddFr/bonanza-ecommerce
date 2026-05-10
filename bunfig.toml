@@ -1,0 +1,3 @@
+[install]
+scripts = false
+minimumReleaseAge = 259200

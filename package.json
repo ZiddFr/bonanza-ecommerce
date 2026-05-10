@@ -3,6 +3,7 @@
   "homepage": "https://ZiddFr.github.io/bonanza-ecommerce/",
   "private": true,
   "version": "0.2.1",
+  "trustedDependencies": [],
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,21 +14,20 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "axios": "^1.7.7",
-    "gh-pages": "^6.3.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-    "react-icons": "^5.5.0",
-    "react-router-dom": "^6.27.0"
+    "gh-pages": "6.3.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-icons": "5.5.0",
+    "react-router-dom": "6.27.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.66",
-    "@types/react-dom": "^18.2.22",
-    "@vitejs/plugin-react-swc": "^3.5.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.6",
-    "vite": "^5.2.0"
+    "@types/react": "18.2.66",
+    "@types/react-dom": "18.2.22",
+    "@vitejs/plugin-react-swc": "3.5.0",
+    "eslint": "8.57.0",
+    "eslint-plugin-react": "7.34.1",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-react-refresh": "0.4.6",
+    "vite": "5.2.0"
   }
 }

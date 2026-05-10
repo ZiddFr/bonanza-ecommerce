@@ -1,183 +1,125 @@
-import axios from "axios"
-import { useEffect } from "react"
-import { NavBar } from './NavBar.jsx'
+// Context
+import { UserStatus } from "../context/UserContext.jsx"
+// Services
+import { productPage } from "../services/productPage.js"
+// Hooks
+import { useEffect, useState, useContext } from "react"
 import { useParams } from "react-router-dom"
+// Jsx
+import { NavBar } from './NavBar.jsx'
+import { Recommended } from "./Recommended.jsx"
+// Css
 import "./DisplayProduct.css"
-
-// Shows the user cart information, 'n' products or none. If it's guest user, shows nothing but a legend.
-export const DisplayProduct = () =>{
+/// Img 777
+import banan from '../imagenes/banan.png'
+export function DisplayProduct(){
+  const allUserContext = useContext(UserStatus)
   const { productId } = useParams()
-  const userPreferences = JSON.parse(localStorage.getItem("userPreferences"))
+  const [productData,setProductData] = useState({})
+  const [index,setIndex] = useState(0)
+  const handleShow = (ind) => {
+    setIndex(ind)
+  }
   useEffect(()=>{
-    const didntWorkSuchWow = () => {
-      const displayingProduct = document.getElementById("displayingProduct")
-      const noTitle = document.createElement("H1")
-      noTitle.innerText = "Wow such empty. No product here. We're sorry."
-      displayingProduct.append(noTitle)
-    }
-    async function getSingleProduct(){
-      try {
-        const dummyJsonApi = `https://dummyjson.com/products/${productId}`
-        const response = await axios.get(dummyJsonApi)
-        const data = response.data
-        return data
-      } catch (error) {
-        // I'll handle this another time, all work like it's the ideal case
-        console.log(error)
-        didntWorkSuchWow()
-      }
-    }
-    const data = getSingleProduct()
-    data.then((product)=>{
-      const displayingProduct = document.getElementById("displayingProduct")
-      if (displayingProduct.hasChildNodes()){
-        displayingProduct.removeChild(displayingProduct.firstElementChild)
-        document.getElementById("searchBar").value = ""
-      }
-      const allContent = document.createElement("div")
-      allContent.setAttribute("id","allProductContent")
-
-      //img div
-      const imagesContainer = document.createElement("div")
-      imagesContainer.setAttribute("class","imagesContainer")
-      const standByImgs = document.createElement("div")
-      standByImgs.setAttribute("class","standByImgs")
-      standByImgs.setAttribute("id","standByImgs")
-      const showingImg = document.createElement("div")
-      showingImg.setAttribute("id","showingImg")
-      product["images"].forEach((imgSrc, currentValue)=>{
-        const img = document.createElement("img")
-        img.setAttribute("src",`${imgSrc}`)
-        img.addEventListener("mouseenter",()=>{
-          const clonedImg = img.cloneNode(false)
-          img.setAttribute("class","activeImg")
-          if(showingImg.hasChildNodes()) {
-            showingImg.removeChild(showingImg.firstElementChild)
-          }
-          showingImg.append(clonedImg)
-        })
-        const clonedImg = img.cloneNode(false)
-        if(currentValue == 0) {
-          console.log(currentValue)
-          showingImg.append(clonedImg)
-        }
-        img.addEventListener("mouseleave",()=>{
-          img.removeAttribute("class","activeImg")
-        })
-        standByImgs.append(img)
-      })
-      imagesContainer.append(standByImgs)
-      imagesContainer.append(showingImg)
-
-      //info div
-      const productInfoContainer = document.createElement("div")
-      productInfoContainer.setAttribute("class","productInfoContainer")
-      const titleProduct = document.createElement("h1")
-      titleProduct.innerText = `${product["title"]}`
-      const brandProduct = document.createElement("p")
-      if(product["brand"]){
-        brandProduct.innerText = `Brand(s): ${product["brand"]}`
-      } else {
-        brandProduct.innerText = `Brand(s) ----`
-      }
-      const ratingProduct = document.createElement("p")
-      ratingProduct.innerText = `Rate: ${product["rating"]}`
-      const categoryProduct = document.createElement("p")
-      categoryProduct.innerText = `Category: ${product["category"]}`
-      const priceProduct = document.createElement("p")
-      priceProduct.innerText = `Price: ${product["price"]}`
-      const discountPercentageProduct = document.createElement("p")
-      discountPercentageProduct.innerText = `Discount: ${product["discountPercentage"]}`
-      const stockProduct = document.createElement("p")
-      stockProduct.innerText = `Stock: ${product["stock"]}`
-      const tagsProductDiv = document.createElement("div")
-      tagsProductDiv.style.display = "flex"
-      tagsProductDiv.style.gap = "10px"
-  
-      product["tags"].forEach((tag)=>{
-        const pTag = document.createElement("p")
-        pTag.innerText = `${tag}`
-        tagsProductDiv.append(pTag)
-      })
-      const availabilityProduct = document.createElement("p")
-      availabilityProduct.innerText = `Available status: ${product["availabilityStatus"]}`
-      const minimumOrderQuantityProduct = document.createElement("p")
-      minimumOrderQuantityProduct.innerText = `Minimum order quantity: ${product["minimumOrderQuantity"]}`
-      productInfoContainer.append(titleProduct)
-      productInfoContainer.append(brandProduct)
-      productInfoContainer.append(ratingProduct)
-      productInfoContainer.append(categoryProduct)
-      productInfoContainer.append(priceProduct)
-      productInfoContainer.append(discountPercentageProduct)
-      productInfoContainer.append(stockProduct)
-      productInfoContainer.append(tagsProductDiv)
-      productInfoContainer.append(availabilityProduct)
-      productInfoContainer.append(minimumOrderQuantityProduct)
-  
-      //description div
-      const descriptionContainer = document.createElement("div")
-      descriptionContainer.setAttribute("class","descriptionContainer")
-      const descriptionProduct = document.createElement("p")
-      descriptionProduct.innerText = `${product["description"]}`
-      const dimensionsProduct = document.createElement("p")
-      dimensionsProduct.innerText = `Dimensions: `
-      const weightProduct = document.createElement("p")
-      weightProduct.innerText = `Width: ${product["dimensions"]["width"]}`
-      const heightProduct = document.createElement("p")
-      heightProduct.innerText = `Height: ${product["dimensions"]["height"]}`
-      const warrantyInfoProduct = document.createElement("p")
-      warrantyInfoProduct.innerText = `Warranty: ${product["warrantyInformation"]}`
-      const shippingInfoProduct = document.createElement("p")
-      shippingInfoProduct.innerText = `Shipping: ${product["shippingInformation"]}`
-      const returnPolicyProduct = document.createElement("p")
-      returnPolicyProduct.innerText = `Return policy: ${product["returnPolicy"]}`
-      descriptionContainer.append(descriptionProduct)
-      descriptionContainer.append(dimensionsProduct)
-      descriptionContainer.append(weightProduct)
-      descriptionContainer.append(heightProduct)
-      descriptionContainer.append(warrantyInfoProduct)
-      descriptionContainer.append(shippingInfoProduct)
-      descriptionContainer.append(returnPolicyProduct)
-  
-      //reviews div
-      const reviewsContainer = document.createElement("div")
-      reviewsContainer.setAttribute("class","reviewsContainer")
-      product["reviews"].forEach((review)=>{
-        const reviewDiv = document.createElement("div")
-        reviewDiv.setAttribute("class","reviewDiv")
-        reviewDiv.style.display = "flex"
-        reviewDiv.style.flexDirection = "column"
-        const reviewerNameReview = document.createElement("p")
-        reviewerNameReview.setAttribute("class","reviewerNameReview")
-        reviewerNameReview.innerText = `Username: ${review["reviewerName"]}`
-        const ratingReview = document.createElement("p")
-        ratingReview.setAttribute("class","ratingReview")
-        ratingReview.innerText = `Rate: ${review["rating"]}`
-        const dateReview = document.createElement("p")
-        dateReview.setAttribute("class","dateReview")
-        dateReview.innerText = `Date: ${review["date"]}`
-        const commentReview = document.createElement("p")
-        commentReview.setAttribute("class","commentReview")
-        commentReview.innerText = `${review["comment"]}`
-        reviewDiv.append(reviewerNameReview)
-        reviewDiv.append(ratingReview)
-        reviewDiv.append(dateReview)
-        reviewDiv.append(commentReview)
-        reviewsContainer.append(reviewDiv)
-      })
-      allContent.append(imagesContainer)
-      allContent.append(productInfoContainer)
-      allContent.append(descriptionContainer)
-      allContent.append(reviewsContainer)
-      displayingProduct.append(allContent)
-    })
+    (async function getProductData(){
+      let allDataProduct = await productPage(productId)
+      setProductData(allDataProduct)
+    })()
   },[])
-  return(
-    <>
-      <span className={`${userPreferences["pageTheme"]}`}>
-      <NavBar logStatus={userPreferences["logStatus"]}/>
-      <div id="displayingProduct"></div>
-      </span>
-    </>
-  )
+  if(Object.keys(productData).length === 0){
+    return(
+      <>
+        <div className={`${allUserContext.pageTheme}`}>
+          <NavBar />
+          <div id="displayingProduct">
+            <h1>Loading product... While wait take banana... here...</h1>
+            <img src={banan} alt="No Product, we sorry, you take banana..." />
+          </div>
+        </div>
+      </>
+    )
+  } else {
+    const finalPrice = (productData.price - (productData.price * productData.discountPercentage / 100)).toFixed(2)
+    return(
+      <>
+        <span className={allUserContext.pageTheme}>
+          <section id="displayingProduct">
+            <div id="allProductContent">
+              <div className="imagesContainer">
+                <div id="standByImgs" className="standByImgs">
+                  {
+                    productData.images.map((productImgSrc,ind)=>{
+                      return(
+                        <img key={ind} src={productImgSrc} alt={`${productData.title}`} className={`inStandByImg productImage-${productImgSrc}`} onMouseEnter={()=>{
+                        handleShow(ind)
+                        }}
+                      />
+                      )
+                    })
+                  }
+                </div>
+                <div id="showingImg">
+                  <img src={productData.images[index]} alt={`${productData.title}`}
+                  className="activeImg"
+                  />
+                </div>
+              </div>
+              <div className="productInfoContainer">
+                <h1 className="productTitle">{productData.title}</h1>
+                <p className="productBrand">Brand: {productData.brand}</p>
+                <p className="productRating">Rate: {productData.rating}</p>
+                <p className="productCategory">Category: {productData.category}</p>
+                <p className="productStock">Stock: {productData.stock}</p>
+                <p className="productPrice">Price: {productData.price}</p>
+                <p className="productDiscountPercentage">Discount: {productData.discountPercentage}%</p>
+                <p className="productFinalPrice">Total: ${finalPrice}</p>
+                <div className="productTags">
+                  {productData.tags.map((tag,ind)=>{
+                    return (<p key={ind} className={`productTag ${tag}`}>{tag}</p>)
+                  })}
+                </div>
+                <p className="productAvailability">Available Status: {productData.availabilityStatus}</p>
+                <p className="productMinimumOrderQuantity">Minimum order quantity: {productData.minimumOrderQuantity}</p>
+              </div>
+              <div className="descriptionContainer">
+                <p className="productDescription">{productData.description}</p>
+                <div className="productDimensions">
+                  <p className="productDimensionWidth">
+                    Width: {productData.dimensions.width}
+                  </p>
+                  <p className="productDimensionHeight">
+                    Height: {productData.dimensions.height}
+                  </p>
+                </div>
+                <p className="productWarrantyInformation">Warranty: {productData.warrantyInformation}</p>
+                <p className="productShippingInformation">
+                  Shipping Information: {productData.shippingInformation}
+                </p>
+                <p className="productReturnPolicy">
+                  Policy: {productData.returnPolicy}
+                </p>
+              </div>
+              <div className="reviewsContainer">
+                {
+                  productData.reviews.map((review, ind)=>{
+                    return(
+                      <div key={ind} className="reviewDiv" style={{display:"flex",flexDirection:"column"}}>
+                        <p className="reviewerNameReview">{review.reviewerName}</p>
+                        <p className="reviewerRatingReview">{review.rating}</p>
+                        <p className="reviewerDateReview">{review.date}</p>
+                        <p className="reviewerComment">{review.comment}</p>
+                      </div>  
+                    )
+                  })
+                }
+              </div>
+            </div>
+          </section>
+          <section className="recommendedSection">
+            <Recommended />
+          </section>  
+        </span>
+      </>
+    )
+  }
 }

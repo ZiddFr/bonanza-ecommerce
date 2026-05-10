@@ -1,4 +1,6 @@
+// jpg, png, etc.
 import logo from '../imagenes/banan.png'
+// css
 import './Logo.css'
 export const Logo = () => {
   return(

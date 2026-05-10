@@ -1,100 +1,107 @@
-import { useEffect,useState } from 'react'
-import { Link } from "react-router-dom"
-import axios from 'axios'
-import { CartButton } from './CartButton'
+// Hooks
+import { useContext,useState,useEffect } from 'react'
+// component
+import { Link } from 'react-router-dom'
+// jsx
+import { CartButton } from './CartButton.jsx'
+import { getOfferProducts } from '../utils/getOfferProducts.js'
+import { UserStatus } from '../context/UserContext.jsx'
+// js
+
+// css
+import './OffersSection.css'
+
+// icons
 import { GrPrevious } from "react-icons/gr"
 import { GrNext } from "react-icons/gr"
-import './OffersSection.css'
-export const OffersSection = ({productsIds,pageTheme}) => {
-  const [productsElements,setProductsElements] = useState([])
+
+export const OffersSection = () => {
+  const allUserContext = useContext(UserStatus)
+  const [index,setIndex] = useState(0)
+  const [dataProducts,setDataProducts] = useState([])
   useEffect(()=>{
-    const getOffers = async ()=>{
-      try {
-        const dummyJsonApi = "https://dummyjson.com/products?limit=0"
-        const response = await axios.get(dummyJsonApi)
-        const data = response.data
-        return data
-      } catch (error) {
-        // I'll handle this another time, all work like it's the ideal case
-        console.log("Error getting products for display as offers because of: " +error)
-      }
-    }
-    const dataProducts = getOffers()
-    dataProducts.then(data =>{
-      let productsOnOffer = data["products"].filter((product)=>{
-        return productsIds.includes(product["id"])
-      })
-      let elements = productsOnOffer.map((product)=>{
-        const offer = (product["price"] - product["price"]*0.99).toFixed(2)
-        return(
-          <div key={product["id"]} className="forEachOffer">
-            <Link
-            reloadDocument
-            to={{
-              pathname:`/displayproduct/${product.id}`
-            }}
-            >
-              <img className="productOffer-img" src={product["images"][0]} alt={product["title"]} />
-            </Link>
-            <div className="previewText">
-              <Link
-              reloadDocument
-              to={{
-                pathname: `/displayproduct/${product.id}`
-              }}
-              >
-                <h3 className="preview_offer-title" title={product["title"]}>{product["title"]}</h3>
-              </Link>
-              <p className="descriptionOffer">{product["description"]}</p>
-              <h3 className="OfferPrice">{offer}</h3>
-              <h3 className="originalPrice">{product["price"]}</h3>
-              <CartButton whatCartType={"productCartType"} productId={product["id"]} />
-            </div>
-          </div>
-        )
-      })
-      setProductsElements(elements)
-      let ind = 0
-      const offerDivs = document.querySelectorAll(".offerDivs")
-      const previousOffer = document.getElementById("previousOffer")
-      previousOffer.addEventListener("click",()=>{
-        offerDivs[ind].style.display = "none"
-        if(ind == 0){
-          ind = offerDivs.length
-        }
-        ind--
-        offerDivs[ind].style.display = "flex"
-        return ind
-      })
-      const nextOffer = document.getElementById("nextOffer")
-      nextOffer.addEventListener("click",()=>{
-        offerDivs[ind].style.display = "none"
-        ind++
-        if(ind == offerDivs.length){
-          ind = 0
-        } 
-        offerDivs[ind].style.display = "flex"
-        return ind
-      })        
-    })
+    (async function gettingData(){
+      let allDataProducts = await getOfferProducts()
+      setDataProducts(allDataProducts)
+      setIndex(0)
+    })()
   },[])
-  return (
-    <>
-      <section id="offers__section__wrapper" className={pageTheme}>
-        <div className="preview_offers">
-          <button id="previousOffer"><p><GrPrevious /></p></button>
-            <div id="forEachOffer-1" className="offerDivs" style={{display:"flex"}}>{productsElements[0]}</div>
-            <div id="forEachOffer-2" className="offerDivs" style={{display:"none"}}>{productsElements[1]}</div>
-            <div id="forEachOffer-3" className="offerDivs" style={{display:"none"}}>{productsElements[2]}</div>
-            <div id="forEachOffer-4" className="offerDivs" style={{display:"none"}}>{productsElements[3]}</div>
-            <div id="forEachOffer-5" className="offerDivs" style={{display:"none"}}>{productsElements[4]}</div>
-            <div id="forEachOffer-6" className="offerDivs" style={{display:"none"}}>{productsElements[5]}</div>
-          <button id="nextOffer"><p><GrNext /></p></button>
-        </div>
-      </section>
-    </>
-  )
+  const handlePrevious = () => {
+    if(dataProducts.length === 0) return;
+    setIndex((prev)=>(prev - 1 + dataProducts.length) % dataProducts.length)
+  }
+  const handleNext = () => {
+    if(dataProducts.length === 0) return;
+    setIndex((prev)=>(prev+1) % dataProducts.length)
+  }
+  if(dataProducts.length == 0){
+    return(
+      <>
+        <h1>Cargando...</h1>
+      </>
+    )
+  } else {
+    return(
+      <>
+        <section 
+          id="offers__section__wrapper" 
+          className={allUserContext.pageTheme}>
+          <div 
+            className="preview_offers">
+            <button 
+              id="previousOffer" 
+              onClick={handlePrevious}>
+              <GrPrevious />
+            </button>
+            <div 
+              className="forEachOffer offerDivs">
+              <Link
+                to={`/displayproduct/${dataProducts[index].id}`}
+              >
+                <img 
+                  className="productOffer-img" 
+                  src={dataProducts[index].images[0]} 
+                  alt={dataProducts[index].title} 
+                />
+              </Link>
+              <div 
+                className="previewText">
+                <Link
+                  className="preview_offer-title" 
+                  title={dataProducts[index].title} 
+                  to={`/displayproduct/${dataProducts[index].id}`}
+                >
+                  <h3>
+                    {dataProducts[index].title}
+                  </h3>
+                </Link>
+                <p 
+                  className="descriptionOffer">
+                  {dataProducts[index].description}
+                  </p>
+                <h3 
+                  className="OfferPrice">
+                  {(dataProducts[index].price * (1 - 0.99)).toFixed(2)}
+                  </h3>
+                <h3 
+                  className="originalPrice">
+                  {dataProducts[index].price}
+                </h3>
+                <CartButton 
+                  whatCartType={"productCartType"} 
+                  productId={dataProducts[index].id} />
+              </div>
+            </div>
+            <button 
+              id="nextOffer" 
+              onClick={handleNext}>
+              <GrNext />
+            </button>
+          </div>
+        </section>
+      </>
+    )
+  }
 }
 // #mydiv-$*3     ->creará 3 divs: <div id="mydiv-1"></div><div id="mydiv-2"></div><div id="mydiv-3"></div>
 //paraiso capital, , The mouts - por que no me dijiste nada, reina de los lagartos - aquel lugar, 
-

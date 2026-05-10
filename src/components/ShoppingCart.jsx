@@ -1,115 +1,77 @@
-import axios from "axios";
-import "./ShoppingCart.css"
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+// Services
+import { userCart } from "../services/userCart.js";
+// Context
+import { UserStatus } from "../context/UserContext.jsx";
+// Hooks
+import { useState,useContext,useEffect } from "react";
+// Jsx
 import { NavBar } from './NavBar.jsx'
+// Css
+import "./ShoppingCart.css"
 
-let userPreferences = {
-  userId: Number,
-  pageTheme: String,
-  logStatus: Boolean,
-}
-if (localStorage.getItem("userPreferences")) {
-  JSON.parse(localStorage.getItem("userPreferences"))
-} else {
-  userPreferences ={
-    userId: 0,
-    pageTheme: `light`,
-    logStatus: false,
-  }
-}
 export const ShoppingCart = () => {
-  const { cartId } = useParams()
-  const userPreferences = JSON.parse(localStorage.getItem("userPreferences"))
-  const logStatus = userPreferences["logStatus"]
-  const pageTheme = userPreferences["pageTheme"]
+  const allUserStatus = useContext(UserStatus)
+  const [userCartInfo,setUserCartInfo] = useState({})
+  const [loading,setLoading] = useState(true)
+  const [error,setError] = useState(null)
   useEffect(()=>{
-    const guestCart = () => {
-      const cartSection = document.getElementById("cartSection")
-      const guestPrinDiv = document.createElement("div")
-      guestPrinDiv.setAttribute("class","guestCartPrin")
-      guestPrinDiv.style.display = "flex"
-      guestPrinDiv.style.justifyContent = "center"
-      const guestTitleCart = document.createElement("h1")
-      guestPrinDiv.style.alignSelf = "center"
-      guestTitleCart.innerText = "Wow! Such empty."
-      guestPrinDiv.append(guestTitleCart)
-      cartSection.append(guestPrinDiv)
-    }
-   
-    axios({
-      method: "GET",
-      url: `https://dummyjson.com/carts/user/${cartId}`,
-    })
-    .then(res=>{
-      const cartData = res.data
-      const cartSection = document.getElementById("cartSection")
-      for(let i=0; i<cartData["products"].length;i++){
-        const secondaryDiv = document.createElement("div")
-        secondaryDiv.setAttribute("class","secondaryDiv")
-        const tertiaryDiv = document.createElement("div")
-        tertiaryDiv.setAttribute("class","terciaryDiv")
-        const allTextDiv = document.createElement("div")
-        allTextDiv.setAttribute("class","allTextDiv")
-        const thumbnail = document.createElement("img")
-        thumbnail.setAttribute("class","thumbnailProduct")
-        thumbnail.setAttribute("src",`${cartData["products"][i]["thumbnail"]}`)
-        const title = document.createElement("h3")
-        title.innerText = `${cartData["products"][i]["title"]}`
-        const originalPrice = document.createElement("p")
-        originalPrice.innerText = `Price: $${cartData["products"][i]["price"]}`
-        originalPrice.style.color = "gray"
-        originalPrice.style.textDecoration = "line-through"
-        const quantity = document.createElement("p")
-        quantity.innerText = `Quantity: ${cartData["products"][i]["quantity"]} products.`
-        const discountPercentage = document.createElement("p")
-        discountPercentage.innerText = `Discount: ${cartData["products"][i]["discountPercentage"]}%`
-        const total = document.createElement("p")
-        total.innerText = `Total for this product: $${cartData["products"][i]["total"]}`
-        total.style.color = "gray"
-        total.style.textDecoration = "line-through"
-        const discountedTotal = document.createElement("p")
-        discountedTotal.innerText = `Total (discount applied): $${cartData["products"][i]["discountedTotal"]}`   
-        secondaryDiv.append(thumbnail)
-        allTextDiv.append(title)
-        allTextDiv.append(originalPrice)
-        tertiaryDiv.append(quantity)
-        tertiaryDiv.append(discountPercentage)
-        allTextDiv.append(tertiaryDiv)
-        allTextDiv.append(total)
-        allTextDiv.append(discountedTotal)
-        secondaryDiv.append(allTextDiv)
-        cartSection.append(secondaryDiv)
+    (async function (){
+      try {
+        const cartData = await userCart(allUserStatus.userId) // {...}
+        setUserCartInfo(cartData)      
+      } catch (error) {
+        console.error(error)
+        setError(error)
+      } finally {
+        setLoading(false)
       }
-      const anotherTextDiv = document.createElement("div")
-      anotherTextDiv.setAttribute("class","anotherTextDiv")
-      const totalProducts = document.createElement("p")
-      totalProducts.innerText = `Total products: ${cartData["totalProducts"]} products.`
-      const totalQuantity = document.createElement("p")
-      totalQuantity.innerText = `Total quantity: ${cartData["totalQuantity"]} products in total.`
-      const totalSum = document.createElement("p")
-      totalSum.innerText = `Total: $${cartData["total"]}`
-      totalSum.style.color = "gray"
-      totalSum.style.textDecoration = "line-through"
-      const discountedTotalSum = document.createElement("p")
-      discountedTotalSum.innerText = `Total (discount applied): $${cartData["discountedTotal"]}`
-      anotherTextDiv.append(totalProducts)
-      anotherTextDiv.append(totalQuantity)
-      anotherTextDiv.append(totalSum)
-      anotherTextDiv.append(discountedTotalSum)
-      cartSection.append(anotherTextDiv)
-    })
-    .catch(error=>{
-      // I'll handle this properly another time, all work like it's the ideal case
-      console.log(error)
-      guestCart()
-    })
-  },[])
+    })()
+  },[allUserStatus.userId])
+  if(loading) return <p>Cargando...</p>
+  if(error) return <p>Hubo un error...</p>
+  if(!userCartInfo?.products?.length){
+    return(
+      <>
+        <span className={allUserStatus.pageTheme}>
+          <NavBar />
+          <section id="cartSection" className="cartSection" >
+            <div className="guestCart">
+              <h1>Wow! Such empty.</h1>
+              <h2>Please consider log in to see your cart or register.</h2>
+            </div>
+          </section>
+        </span>
+      </>
+    )
+  }
   return(
     <>
-      <span className={`${userPreferences["pageTheme"]}`}>
-        <NavBar logStatus={logStatus} pageTheme={pageTheme} />
+      <span className={allUserStatus.pageTheme}>
+        <NavBar />
         <section id="cartSection" className="cartSection" >
+          {
+            userCartInfo.products.map((product,index)=>{
+              return(
+                <div key={product.id} className="productData">
+                  <img className="productThumbnail" src={product.thumbnail} alt={product.title} />
+                  <div className="productInformation">
+                    <h3>{product.title}</h3>
+                    <p>Price: {product.price}</p>
+                    <p>Quantity: {product.quantity}</p>
+                    <p>Sub-Total:{product.total}</p>
+                    <p>Discount: {product.discountPercentage}%</p>
+                    <p>Discounted Total: ${product.discountedTotal}</p>
+                  </div>
+                </div>  
+              )
+            })
+          }
+          <div className="totalToPay">
+            <p>Quantity: {userCartInfo.totalQuantity}</p>
+            <p>Total products: {userCartInfo.totalProducts}</p>
+            <p>Sub-Total: ${userCartInfo.total}</p>
+            <p>Discounted Total: ${userCartInfo.discountedTotal}</p>
+          </div>
         </section>
       </span>
     </>

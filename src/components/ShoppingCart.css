@@ -10,7 +10,7 @@
   width: 300px;
   height: 300px;
 }
-.secondaryDiv{
+.productData{
   margin-top: 2.5em;
   padding: 10px;
   border-radius: 7px;
@@ -19,16 +19,12 @@
   height: 50vh;
   justify-content: space-between;
 }
-.tertiaryDiv {
+.productInformation {
   display: flex;
   align-self: flex-end;
 }
-.quaternaryDiv {
-  width: 30vw;
-  display: flex;
-  flex-direction: column;
-}
-.anotherTextDiv{
+
+.totalToPay{
   margin-top: 2.5em;
   align-self: flex-end;
   margin-right: 20vw;

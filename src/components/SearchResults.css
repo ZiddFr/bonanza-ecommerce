@@ -1,0 +1,12 @@
+.titleProduct{
+  font-weight: bold;
+}
+.categoryContainer {
+  display: flex;
+}
+.pCategory {
+  font-size: smaller;
+}
+.categoryProduct {
+  font-size: large;
+}

@@ -1,3 +1,4 @@
+// Dependencies
 import React from "react";
 import { OfferContainer } from './OfferContainer.jsx'
 export const Offers = ({offers}) => {

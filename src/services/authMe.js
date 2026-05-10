@@ -1,18 +1,23 @@
-import axios from "axios";
+// API - Services
+import { API } from './api.js'
 export async function authMe(userToken){
   try {
-    const response = await axios({
-      method: "GET",
-      url: "https://dummyjson.com/auth/me",
-      headers: {
-        Authorization: `Bearer ${userToken}`
+    const response = await fetch(API.AUTH_ME,{
+      headers:{
+        'Authorization': `Bearer ${userToken}`,
+        'Content-Type': 'application/json'
       },
-      withCredentials: 'include'
+      credentials: 'include'
     })
-    const userData = response.data
-    return userData
+    if(!response.ok) throw new Error("Solicitud fallida.")
+    const userData = await response.json()
+    if(response.ok && !userData.error){
+      return userData
+    } else {
+      console.error("Couldn't authenticate token: ", userData.error || "Invalid credentials")
+      return null
+    }
   } catch (error) {
-    console.log("Couldn't authenticate token: ", error)
-    return null
+    console.error("Network error:", error)
   }
 }
