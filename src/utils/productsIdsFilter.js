@@ -1,6 +1,6 @@
 // Services
 import { products } from "../services/products.js"
-export async function producstIdsfilter(productsIds){
+export async function productstIdsfilter(productsIds){
   const productsData = await products()
   const allProducts = productsData["products"]
   let productsInOffer;

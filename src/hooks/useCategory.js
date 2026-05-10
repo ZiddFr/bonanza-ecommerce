@@ -6,7 +6,7 @@ import { useState,useEffect } from "react"
 import { filteringArrays } from "../utils/filteringArrays.js"
 // Js
 import { randomizer } from "../utils/randomizer.js"
-import { producsCategories } from "../services/productsCategories.js"
+import { productsCategories } from "../services/productsCategories.js"
 import { hotDealsProducts } from "../utils/hotDealsProducts.js"
 export function useCategory(limit){
   const [categoryData,setCategoryData] = useState([])
@@ -15,7 +15,7 @@ export function useCategory(limit){
     let isMounted = true
     (async function(){
       try {
-        const categoriesList = await producsCategories()
+        const categoriesList = await productsCategories()
         const chosenCategories = randomizer(categoriesList || [],limit)
         const hotDeals = await hotDealsProducts() // [...]
         const data = await Promise.all(
