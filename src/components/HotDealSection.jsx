@@ -10,7 +10,7 @@ import { CartButton } from './CartButton.jsx'
 import { hotDealsProducts } from '../utils/hotDealsProducts.js'
 // Js
 // Css
-import './HotDealsSection.css'
+import './HotDealSection.css'
 // icons
 import { GrPrevious } from "react-icons/gr"
 import { GrNext } from "react-icons/gr"
@@ -102,5 +102,3 @@ export const HotDealSection = () => {
     )
   }
 }
-// #mydiv-$*3     ->creará 3 divs: <div id="mydiv-1"></div><div id="mydiv-2"></div><div id="mydiv-3"></div>
-//paraiso capital, , The mouts - por que no me dijiste nada, reina de los lagartos - aquel lugar, 
