@@ -6,6 +6,7 @@ import { UserStatus } from "../context/UserContext.jsx";
 import { useState,useContext,useEffect } from "react";
 // Jsx
 import { NavBar } from './NavBar.jsx'
+import { CartButton } from "./CartButton.jsx";
 // Css
 import "./ShoppingCart.css"
 
@@ -15,10 +16,10 @@ export const ShoppingCart = () => {
   const [loading,setLoading] = useState(true)
   const [error,setError] = useState(null)
   useEffect(()=>{
-    (async function (){
+    ;(async function (){
       try {
         const cartData = await userCart(allUserStatus.userId) // {...}
-        setUserCartInfo(cartData)      
+        setUserCartInfo(cartData)    
       } catch (error) {
         console.error(error)
         setError(error)
@@ -26,10 +27,10 @@ export const ShoppingCart = () => {
         setLoading(false)
       }
     })()
-  },[allUserStatus.userId])
+  },[])
   if(loading) return <p>Cargando...</p>
   if(error) return <p>Hubo un error...</p>
-  if(!userCartInfo?.products?.length){
+  if(!userCartInfo){
     return(
       <>
         <span className={allUserStatus.pageTheme}>
@@ -50,7 +51,7 @@ export const ShoppingCart = () => {
         <NavBar />
         <section id="cartSection" className="cartSection" >
           {
-            userCartInfo.products.map((product,index)=>{
+            userCartInfo.carts[0].products.map((product)=>{
               return(
                 <div key={product.id} className="productData">
                   <img className="productThumbnail" src={product.thumbnail} alt={product.title} />
@@ -62,15 +63,16 @@ export const ShoppingCart = () => {
                     <p>Discount: {product.discountPercentage}%</p>
                     <p>Discounted Total: ${product.discountedTotal}</p>
                   </div>
+                  <CartButton productId={product.id} />
                 </div>  
               )
             })
           }
           <div className="totalToPay">
-            <p>Quantity: {userCartInfo.totalQuantity}</p>
-            <p>Total products: {userCartInfo.totalProducts}</p>
-            <p>Sub-Total: ${userCartInfo.total}</p>
-            <p>Discounted Total: ${userCartInfo.discountedTotal}</p>
+            <p>Total products: {userCartInfo.carts[0].totalProducts}</p>
+            <p>Quantity: {userCartInfo.carts[0].totalQuantity}</p>
+            <p>Sub-Total: ${userCartInfo.carts[0].total}</p>
+            <p>Discounted Total: ${userCartInfo.carts[0].discountedTotal}</p>
           </div>
         </section>
       </span>

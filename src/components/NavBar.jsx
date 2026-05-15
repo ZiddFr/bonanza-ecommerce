@@ -39,7 +39,7 @@ export const NavBar = () => {
           <SearchBar />
           <div className="navBarButtons userButtons">
             <button onClick={handleUserSettings}><IoSettingsOutline /></button>
-            <button className="generalCartButton userCartType" onClick={handleShoppingCart}><BsCart /></button>
+            <button className="generalCartButton" onClick={handleShoppingCart}><BsCart /></button>
             <LogOut />
           </div>
         </section>

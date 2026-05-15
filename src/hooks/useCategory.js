@@ -13,7 +13,7 @@ export function useCategory(limit){
   const [loading,setLoading] = useState(true)
   useEffect(()=>{
     let isMounted = true
-    (async function(){
+    ;(async function(){
       try {
         const categoriesList = await productsCategories()
         const chosenCategories = randomizer(categoriesList || [],limit)
@@ -21,11 +21,11 @@ export function useCategory(limit){
         const data = await Promise.all(
           chosenCategories.map(async (categoryName) =>{
             const products = await productsByCategory(categoryName) ?? []
-            const {normalProducts,hotDeals} = filteringArrays(products,hotDeals)
+            const {normalProducts,hotDealProducts} = filteringArrays(products,hotDeals)
             return {
               categoryName: categoryName,
               normalProducts: normalProducts,
-              hotDealProducts: hotDeals
+              hotDealProducts: hotDealProducts
             }
           })
         )

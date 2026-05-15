@@ -11,11 +11,15 @@ import { Loader } from './Loader.jsx'
 // js
 
 // css
-
+import './HotDealSection.css'
+import "./CategoriesSection.css"
+import '../Root.css'
 export function MainPage() {
-  const allUserContext = useContext(UserStatus)
+  const allUserStatus = useContext(UserStatus)
+  console.log(allUserStatus.logStatus)
+  console.log(allUserStatus.userId)
   return (
-    <div id="app" className={allUserContext.pageTheme}>
+    <div id="app" className={allUserStatus.pageTheme}>
       <Loader />
       <div id="main">
         <NavBar />

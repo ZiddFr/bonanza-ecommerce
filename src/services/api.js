@@ -8,7 +8,7 @@ export const API = {
   SINGLE_PRODUCT: "https://dummyjson.com/products",
   SEARCH_PRODUCT: "https://dummyjson.com/products/search?q=",
   CARTS: "https://dummyjson.com/carts", // All carts but for what?
-  USER_CART: "https://dummyjson.com/carts/user",
-  PRODUCTS_BY_CATEGORY: "https://dummyjson.com/products/category",
+  USER_CART: "https://dummyjson.com/carts/user/",
+  PRODUCTS_BY_CATEGORY: "https://dummyjson.com/products/category/",
   PRODUCTS_CATEGORY_LIST: "https://dummyjson.com/products/category-list"
 }

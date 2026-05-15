@@ -20,7 +20,7 @@ export const HotDealSection = () => {
   const [index,setIndex] = useState(0)
   const [dataProducts,setDataProducts] = useState([])
   useEffect(()=>{
-    (async function gettingData(){
+    ;(async function gettingData(){
       const hotDeals = await hotDealsProducts() // [...]
       setDataProducts(hotDeals)
       setIndex(0)

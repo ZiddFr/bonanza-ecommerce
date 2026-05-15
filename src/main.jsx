@@ -14,6 +14,9 @@ import { ShoppingCart } from "./components/ShoppingCart.jsx"
 import { Loginregisterform } from './components/Loginregisterform.jsx'
 import { LoginRegisterLayout } from './components/LoginRegisterLayout.jsx'
 
+// Css
+import './Root.css'
+
 const hrouter = createHashRouter([
   {
     path:"/",
@@ -28,11 +31,11 @@ const hrouter = createHashRouter([
         element: <DisplayProduct />
       },
       {
-        path:"userprofile/",
+        path:"userprofile/:userId",
         element: <UserProfile />
       },
       {
-        path:"shoppingcart/",
+        path:"shoppingcart/:userId",
         element: <ShoppingCart />
       },
       {

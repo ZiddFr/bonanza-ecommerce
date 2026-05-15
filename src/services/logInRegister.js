@@ -1,7 +1,7 @@
 // API - Services
 import { API } from "./api.js"
-export async function logInRegister(formType,useName,userPassword,userEmail){
-  if(formType === "login"){
+export async function logInRegister(formType,userName,userPassword,userEmail){
+  if(formType === "logIn"){
     try {
       const response = await fetch(API.LOGIN,{
         method: 'POST',
@@ -10,9 +10,9 @@ export async function logInRegister(formType,useName,userPassword,userEmail){
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          username: useName,
+          username: userName,
           password: userPassword,
-          expiresInMins: 30, // optional, defaults to 60           
+          expiresInMins: 5, // optional, defaults to 60           
         }),
         credentials: 'include'
       })

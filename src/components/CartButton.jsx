@@ -33,9 +33,9 @@ export function CartButton({productId}){
   let cartIcon = ""
   if(allUserContext.logStatus) {
     if(productsIdsInUserCart.includes(productId)){
-      cartIcon = "addProduct"
-    } else {
       cartIcon = "removeProduct"
+    } else {
+      cartIcon = "addProduct"
     }
   } else {
     cartIcon = "guestCart"

@@ -9,9 +9,8 @@ import { Loader } from './components/Loader.jsx'
 // Js
 
 // Css
-import './Root.css'
 import './App.css'
-
+import './Root.css'
 export function App() {
   const allUserContext = useContext(UserStatus)
   return (

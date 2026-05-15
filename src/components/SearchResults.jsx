@@ -1,10 +1,10 @@
 // React component
 import { Link } from "react-router-dom"
-export function SearchResults({product}){
+export function SearchResults({product, onClick}){
   return(
     <div className="NavLinkWrapper result">
       <Link to={`/displayproduct/${product.id}`}>
-        <div className="showingProduct">
+        <div className="showingProduct" onClick={onClick}>
           <p className="titleProduct">
             {product.title}
           </p>

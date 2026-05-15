@@ -18,21 +18,23 @@ export const SearchBar = () => {
   const handleNavigate = () => {
     navigate(`/catalog?q=${searchInput}`)
   }
-  const handleChange = (value) => {
-    setSearchInput(value)
-    if(!value){
-      setResults({})
+  const handleChange = (searchValue) => {
+    setSearchInput(searchValue)
+    setIsFocused(true)
+    if(!searchValue){
+      setResults([])
+      setIsFocused(false)
       return
     }
-    (async function(){
+    ;(async function(){
       try {
-        const searchResponse = await search(value)
+        const searchResponse = await search(searchValue)
         setResults(searchResponse)
       } catch (error) {
         console.error("Error: ", error)
         //Tal vez agregar un pop-up mostrando error
         // de búsqueda o no hay productos con ese input
-        setResults({})
+        setResults([])
       }
     })()
   }
@@ -49,24 +51,23 @@ export const SearchBar = () => {
   },[])
   return (
     <>
-    <form onSubmit={(e)=>{
-      e.preventDefault()
-      handleNavigate()}} id="searchBar_wrapper" >
-      <div ref={searchBarRef} className="searchBar_wrapper">
-      <InputForm inputType={"search"} name={"searchBar"} inputId={"searchBar"} textPlaceholder={"SearchBar..."} onChange={e=>{handleChange(e.target.value)}} onClick={()=>{
-        setIsFocused(prev => !prev)
-      }} />
-      </div>
-      <div id="searchResults">
-        {isFocused &&
-          results.map((product,index)=>{
-            return(
-              <SearchResults key={index} product={product} />
-            )
-          })
-        }
-      </div>
-    </form>
+      <form onSubmit={(e)=>{
+        e.preventDefault()
+        handleNavigate()}} id="searchBarWrapperForm" >
+        <div ref={searchBarRef} className="searchBar_wrapper">
+          <InputForm inputType={"search"} name={"searchBar"} inputId={"searchBar"} textPlaceholder={"SearchBar..."} onChange={(e)=>{handleChange(e.target.value)}} onClick={()=>{
+            setIsFocused(prev => !prev)}} />
+          <div id="searchResults">
+            {isFocused &&
+              results.map((product,index)=>{
+                return(
+                  <SearchResults key={index} product={product} onClick={()=>{setIsFocused(false)}}/>
+                )
+              })
+            }
+          </div>
+        </div>
+      </form>
     </>
   )
 }

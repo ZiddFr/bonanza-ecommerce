@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom"
 // Jsx
 import { NavBar } from './NavBar.jsx'
 import { Recommended } from "./Recommended.jsx"
+import { CartButton } from "./CartButton.jsx"
 // Css
 import "./DisplayProduct.css"
 /// Img 777
@@ -21,11 +22,11 @@ export function DisplayProduct(){
     setIndex(ind)
   }
   useEffect(()=>{
-    (async function getProductData(){
+    ;(async function getProductData(){
       let allDataProduct = await productPage(productId)
       setProductData(allDataProduct)
     })()
-  },[])
+  },[productId])
   if(Object.keys(productData).length === 0){
     return(
       <>
@@ -36,6 +37,7 @@ export function DisplayProduct(){
             <img src={banan} alt="No Product, we sorry, you take banana..." />
           </div>
         </div>
+        <Recommended />
       </>
     )
   } else {
@@ -43,6 +45,7 @@ export function DisplayProduct(){
     return(
       <>
         <span className={allUserContext.pageTheme}>
+          <NavBar />
           <section id="displayingProduct">
             <div id="allProductContent">
               <div className="imagesContainer">
@@ -98,6 +101,7 @@ export function DisplayProduct(){
                 <p className="productReturnPolicy">
                   Policy: {productData.returnPolicy}
                 </p>
+                <CartButton productId={productData.id}/>
               </div>
               <div className="reviewsContainer">
                 {

@@ -1,5 +1,7 @@
+// Context
+import { UserStatus } from "../context/UserContext.jsx";
 // Hooks
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Js
 import { logInRegister } from "../services/logInRegister";
@@ -11,6 +13,7 @@ import { TextLink } from "./TextLink.jsx";
 import './Loginregisterform.css'
 export function Loginregisterform(){
   const navigate = useNavigate()
+  const allUserStatus = useContext(UserStatus)
   const [userName,setUserName] = useState("")
   const [userPassword,setUserPassword] = useState("")
   const [formMessage,setFormMessage] = useState("")
@@ -23,12 +26,16 @@ export function Loginregisterform(){
     setFormMessage("")
     setMessageContent("")
   }
-
   const handleLoginSubmit = async (e) =>{
     e.preventDefault()
     const userData = await logInRegister("logIn",userName,userPassword)
     if(userData){
-      document.cookie = `access_token=${userData["accessToken"]}; SameSite=Strict; Secure`
+      allUserStatus.setUserId(userData["id"])
+      allUserStatus.setLogStatus(true)
+      allUserStatus.setToken(userData["accessToken"])
+      const savedTheme = localStorage.getItem("pageTheme") ?? "beeMeMeBee"
+      allUserStatus.setPageTheme(savedTheme) 
+      document.cookie = `access_token=${userData["accessToken"]}; max-age=1800; SameSite=Strict; Secure`
       navigate('/')
     } else {
       console.log("Error trying to log in.")

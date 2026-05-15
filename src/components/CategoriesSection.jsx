@@ -22,13 +22,15 @@ export function CategoriesSection({categoryLimit}){
             ...category.hotDealProducts.map((prod)=>({...prod,isHotDeal:true}))
           ]
           return(
-            <section key={category.categoryName} className={`category__${category.categoryName}`}>
+            <section key={category.categoryName} className={`category ${category.categoryName}`}>
               <h1>{category.categoryName}</h1>
-              {
-                products.map(product=>(
-                  <ProductCard key={product.id} product={product} />
-                ))
-              }
+              <div className="productsCardsPreview">
+                {
+                  products.map(product=>(
+                    <ProductCard key={product.id} product={product} />
+                  ))
+                }
+              </div>
             </section>
           )
         })

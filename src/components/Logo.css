@@ -22,6 +22,7 @@
   display: inherit;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 #img_logo{
   height: 50px;

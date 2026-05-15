@@ -1,49 +1,34 @@
-#searchBar_wrapper{
-  display: flex;
-  justify-content: center;
+/* Contenedor padre */
+.searchBar_wrapper {
   position: relative;
-  margin-top: 1.5rem;
-  height: 4.5rem;
+  width: 300px; /* o el ancho que quieras */
 }
-#searchBar{
-  width: 30rem;
-  height: 2.5rem;
-  padding: 5px 40px 5px 15px;
-  font-size: larger;
-  border-radius: 7px;
-  border: 1px solid black;
-  margin-right: 100px;
-}
-#searchBar:focus{
-  outline-color: #9DF3C4;
-  border-radius: 7px 7px 0 0;
-}
-#searchResults{
-  width: 29.9rem;
-  margin-top: 40px;
-  margin-right: 100px;
-  border-radius: 0 0 7px 7px;
+
+/* Menú flotante */
+#searchResults {
   position: absolute;
-  background: #e2e2e2;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  z-index: 5;
+  top: 100%; /* justo debajo del padre */
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 0 0 8px 8px;
+  z-index: 100;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-.showingProduct{
-  background-color: #d3d5d8;
-  display: flex;
-  flex-direction: column;
-  margin: 4px;
-  overflow-x: hidden;
+
+/* Cada resultado */
+.result {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
 }
-.showingProduct p {
-  color: black;
+
+.result:hover {
+  background: #f5f5f5;
 }
-.titleProduct{
-  font-size: larger;
-}
-.blur-hidden {
-  opacity: 0;
-  pointer-events: none;
+
+.result a {
+  text-decoration: none;
+  color: inherit;
 }
