@@ -1,0 +1,17 @@
+.byCategory{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 16px 16px 16px;
+  height: fit-content;
+  
+}
+
+.producstByCategory{
+  padding-top: 1rem;
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}

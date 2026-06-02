@@ -1,0 +1,34 @@
+// Hooks
+import { useCategory } from "../hooks/useCategory";
+// Jsx
+import { ProductCard } from "./ProductCard.jsx";
+// css
+import "./CategoriesSection.css"
+export function CategoriesSection({categoryLimit}){
+  const {categoryData,loading} = useCategory(categoryLimit)
+  if(loading) return <p>Cargando....</p>
+  return(
+    <>
+      {
+        categoryData.map((category)=>{
+          const products = [
+            ...category.normalProducts.map((prod)=>({...prod,isHotDeal:false})),
+            ...category.hotDealProducts.map((prod)=>({...prod,isHotDeal:true}))
+          ]
+          return(
+            <section key={category.categoryName} className={`category ${category.categoryName}`}>
+              <h2>{category.categoryName}</h2>
+              <div className="productsCardsPreview">
+                {
+                  products.map(product=>(
+                    <ProductCard key={product.id} product={product} />
+                  ))
+                }
+              </div>
+            </section>
+          )
+        })
+      }
+    </>
+  )
+}

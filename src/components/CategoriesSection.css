@@ -1,0 +1,19 @@
+.category {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  margin-bottom: 24px;
+  height: fit-content;
+}
+
+.category h2 {
+  text-transform: capitalize;
+  margin-bottom: 12px;
+  color: rgb(0, 0, 0);
+}
+.productsCardsPreview{
+  display: flex;
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  align-items: stretch;
+}

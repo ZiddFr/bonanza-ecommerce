@@ -1,0 +1,118 @@
+:root{
+  /* be me, me bee*/
+  --primary-beeme: #222831;
+  --secondary-beeme: #2E3440;
+  --tertiary-beeme: #FFC933;
+  --tertiary-softBee: #FFE082;
+  --quaternary-beeme: #F7F7F7;
+
+  --accent-beeme: #D89B00;
+  --soft-yellowBee: #FFE27A;
+  --dark-yellowBee: #B8860B;
+  
+  --border-colorBee: #E2E2E2;
+  --shadow-softBee: 0 4px 10px rgba(0,0,0,0.06);
+  --shadow-hoverBee: 0 10px 25px rgba(0,0,0,0.12);
+  --text-softBee: #666;
+  --white: #FFFFFF;
+
+  /* fadding emerald */
+  --primary-femerald: #1FAB89;
+  --secondary-femerald: #62D2A2;
+  --tertiary-femerald: #9DF3C4;
+  --quaternary-femerald: #D7FBE8;
+}
+.switchThemeContainer{
+  position: relative;
+  width: fit-content;
+}
+#switchThemeButton{
+
+}
+.themes{
+  z-index: 1000;
+  position: absolute;
+  width: fit-content;
+  background: #EEEEEE;
+  border-radius: 14px;
+  padding: 10px;
+  top: calc(100% + 10px);
+  right: 0;
+  transform-origin: top right;
+  backdrop-filter: blur(12px);
+  animation: menuIsOpen 0.25s ease;
+}
+@keyframes menuIsOpen{
+  from{
+    opacity:0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.themes{
+  display: flex;
+  flex-direction: column;
+  gap:8px;
+}
+.buttonTheme{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+.buttonTheme:hover{
+  transform: translateX(4px);
+}
+
+#faddingEmeraldTheme p{
+background: linear-gradient(90deg,#1FAB89,#1FAB89,#62D2A2,#62D2A2,#9DF3C4,#D7FBE8,#1FAB89,#1FAB89,#1FAB89);
+background-size: 300%;
+background-position: left;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+transition: background-position 1s ease;
+}
+#faddingEmeraldTheme:hover p{
+  background-position: right;
+}
+.icconEmerald{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.4s ease, transform 0.3s ease;
+  transition-delay: 0s;  
+}
+#faddingEmeraldTheme:hover .iconEmerald{
+  color:#1FAB89;
+  transform: scale(1.15);
+  transition-delay: 0.7s;
+}
+#beeMeMeBeeTheme p{
+  background: linear-gradient(90deg,#FFD369,#FFD369,#393E46,#222831,#EEEEEE,#FFD369,#FFD369,#FFD369);
+  background-size: 300%;
+  background-position: left;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 1s ease;
+}
+#beeMeMeBeeTheme:hover p{
+  background-position: right;
+}
+.iconBee{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.4s ease, transform 0.3s ease;
+  transition-delay: 0s;
+}
+#beeMeMeBeeTheme:hover .iconBee{
+  color:#FFD369;
+  transform: scale(1.15);
+  transition-delay: 0.7s;
+}

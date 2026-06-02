@@ -1,0 +1,85 @@
+#hotDeals__section__wrapper {
+  margin: 0;
+  padding: 2.5em 0em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preview_hotDeals {
+  width: min(1400px,80%);
+  margin: auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  transition: fadeIn 0.25s ease;
+}
+.forEachHotDeal{
+  width: min(1100px,100%);
+  min-height: 420px;
+  border-radius: 24px;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  transition:
+    transform 0.35s cubic-bezier(0.22,0.61,0.36,1),
+    box-shadow 0.35 cubic-bezier(0.22,0.61,0.36,1);
+}
+.productHotDeal-img{
+  width: 100%;
+  max-width: 450px;
+  height: 320px;
+  object-fit: contain;
+  border-radius: 20px;
+  padding: 1rem;
+}
+.preview_hotDeal-title h3{
+  font-size: clamp(1.8rem,3vw,2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+.descriptionHotDeal{
+  line-height: 1.6;
+  max-height: 120px;
+  overflow: hidden;
+}
+.originalPrice{
+  text-decoration: line-through;
+  font-size: 1rem;
+}
+.hotDealPrice{
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+.hotDealBadge{
+  width: fit-content;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+#previousHotDeal,#nextHotDeal{
+  position: absolute;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease-in-out;
+  z-index: 5;
+}
+#previousHotDeal{
+  left: -2rem;
+  bottom: 2rem;
+}
+#nextHotDeal{
+  top: 2rem;
+  right: -2rem;
+}
+#previousHotDeal:hover,#nextHotDeal:hover{
+  transform: scale(1.08);
+  cursor: pointer;
+}
