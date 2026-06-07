@@ -64,3 +64,10 @@ README
  Tecnologías usadas.
  Cómo ejecutar el proyecto.
  Características principales.
+
+ ***** PopUp.jsx
+Para el futuro, usarlo como modal con botón X, solo agregar:
+
+Un prop dismissible booleano
+Un useState para isVisible
+Un botón X que llame setIsVisible(false)

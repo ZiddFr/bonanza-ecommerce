@@ -6,27 +6,23 @@ body {
   --border-radius: 4px;
 
   margin: 0;
-  height: 100vh;
-
-  font-size: 18px;
-  /* bg url y bgsize en caso de utilizar una imagen como fondo */
-  /* background: url(); */
-  /* background-size: cover; */
+  padding: 0;
 }
 #fullBody{
   width: 100vw;
   height: 100vh;
+  padding-top: 4rem;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.logContainer {
+.logContainer,.registerContainer {
   width: 500px;
   max-width: 500px;
   margin: 1rem;
   padding: 2rem;
-  box-shadow: 0 0 40px rgba(0,0,0,0.2);
   border-radius: var(--border-radius);
 }
 
@@ -100,6 +96,7 @@ body {
 .form__button {
   width: 100%;
   padding: 1rem 2rem;
+  margin-bottom: 1rem;
   font-weight: bold;
   font-size: 1.1rem;
   color: #ffffff;
@@ -108,9 +105,6 @@ body {
   outline: none;
   cursor: pointer;
 }
-
-
-
 .form__button:active {
   transform: scale(0.98);
 }
