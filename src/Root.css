@@ -58,6 +58,9 @@
   --tertiary-femerald: #9DF3C4;
   --quaternary-femerald: #D7FBE8;
 
+  --text-darkFemerald: #006a4f;
+  --border-femerald: #007155;
+
   /* rayquaza */
   --primary-shiny-shamrock: #589E7D;
   --secondary-deep-aquamarine: #408861;
@@ -122,21 +125,33 @@
   }
   /* Login Register Form  */
   #fullBody{
-    background-image: linear-gradient(180deg,#1FAB89, #1FAB89,#1FAB89,#1FAB89,#1FAB89,#62D2A2) !important;
+    background: var(--primary-femerald);
+  }
+  .popUp{
+    background: var(--secondary-femerald);
+    box-shadow: 0 0 0 3px var(--tertiary-femerald);
+    border: 1px solid var(--border-femerald);
+  }
+  .popUpMessage{
+    color: var(--text-darkFemerald);
+    opacity: 0.8;
   }
   #fullBody a:link, a{
     color: var(--quaternary-femerald);
   }
-  .logContainer{
-    background-image: linear-gradient(180deg,#62D2A2, #62D2A2,#1FAB89) !important;
+  /*--- Log In Form --- Register Form */
+.logContainer,.registerContainer{
+    background: var(--secondary-femerald);
+    border: 1px solid var(--border-femerald);
   }
   .form__button{
-    color: var(--quaternary-femerald);
-    background-color: var(--primary-femerald);
+    color: var(--primary-femerald);
+    background-color: var(--tertiary-femerald);
   }
   .form__title {
-    color: var(--primary-femerald);
+    color: var(--quaternary-femerald);
   }
+
   /* User Settings */
   h1 {
     color: black;

@@ -1,0 +1,17 @@
+.popUp{
+  position: absolute;
+  z-index: 100;
+  right: 12px;
+  top: 12px;
+  border-radius: 24px;
+  width: 300px;
+  height: auto;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.popUp p{
+  text-align: start;
+  font-size: 1rem;
+  font-weight: 800;
+}

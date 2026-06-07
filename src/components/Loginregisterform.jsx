@@ -9,6 +9,7 @@ import { logInRegister } from "../services/logInRegister";
 import { Logo } from "./Logo";
 import { InputForm } from "./InputForm.jsx";
 import { TextLink } from "./TextLink.jsx";
+import { PopUp } from "./PopUp.jsx";
 // Css
 import './Loginregisterform.css'
 export function Loginregisterform(){
@@ -88,6 +89,7 @@ export function Loginregisterform(){
       <>
         <span className={"faddingEmerald"}>
           <div id="fullBody">
+            <PopUp typeOfMessage={"logInMessage"} />
             <Logo />
             <div className="logContainer">
               <form className="form" id="login" onSubmit={handleLoginSubmit}>
@@ -117,6 +119,7 @@ export function Loginregisterform(){
       <>
         <span className={"faddingEmerald"}>
           <div id="fullBody">
+            <PopUp typeOfMessage={"registerMessage"} />
             <Logo />
             <div className="registerContainer">
               <form className="form" id="createAccount" onSubmit={handleRegisterSubmit}>
